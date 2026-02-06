@@ -12,16 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fe92dba023413c4f88335223ff6fdc5, type: 3}
   m_Name: TheGibbon
   m_EditorClassIdentifier: Assembly-CSharp::MonkeyDefinition
-  monkeyId: starter
-  displayName: Starter Monkey
+  monkeyId: gibbon
+  displayName: The Gibbon
   icon: {fileID: 0}
   prefab: {fileID: 0}
-  healthMultiplier: 1
-  damageMultiplier: 1
-  apsMultiplier: 1
-  speedMultiplier: 1
+  healthMultiplier: 4
+  damageMultiplier: 0.5
+  apsMultiplier: 1.5
+  speedMultiplier: 2
   rangeMultiplier: 1
-  cooldownMultiplier: 1
+  cooldownMultiplier: 3
   health:
     baseValue: 0
     addPerLevel: 0
