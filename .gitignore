@@ -1,4 +1,4 @@
-[Ll]ibrary/
+t[Ll]ibrary/
 [Tt]emp/
 [Bb]uild/
 [Bb]uilds/
@@ -18,3 +18,8 @@ MemoryCaptures/
 *.mdb
 *.opendb
 *.VC.db
+# JetBrains / Rider
+.idea/
+
+# Build artifacts
+obj/
