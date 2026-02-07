@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fe92dba023413c4f88335223ff6fdc5, type: 3}
+  m_Name: TheGibbon
+  m_EditorClassIdentifier: Assembly-CSharp::MonkeyDefinition
+  monkeyId: gibbon
+  displayName: The Gibbon
+  icon: {fileID: 0}
+  prefab: {fileID: 0}
+  healthMultiplier: 4
+  damageMultiplier: 0.5
+  apsMultiplier: 1.5
+  speedMultiplier: 2
+  rangeMultiplier: 1
+  cooldownMultiplier: 3
+  health:
+    baseValue: 0
+    addPerLevel: 0
+    multPerLevel: 0
+    baseCost: 0
+    costGrowth: 0
+  damage:
+    baseValue: 0
+    addPerLevel: 0
+    multPerLevel: 0
+    baseCost: 0
+    costGrowth: 0
+  attacksPerSecond:
+    baseValue: 0
+    addPerLevel: 0
+    multPerLevel: 0
+    baseCost: 0
+    costGrowth: 0
+  moveSpeed:
+    baseValue: 0
+    addPerLevel: 0
+    multPerLevel: 0
+    baseCost: 0
+    costGrowth: 0
+  range:
+    baseValue: 0
+    addPerLevel: 0
+    multPerLevel: 0
+    baseCost: 0
+    costGrowth: 0
+  cooldown:
+    baseValue: 0
+    addPerLevel: 0
+    multPerLevel: 0
+    baseCost: 0
+    costGrowth: 0
