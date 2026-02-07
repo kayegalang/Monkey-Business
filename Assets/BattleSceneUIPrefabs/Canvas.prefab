@@ -597,7 +597,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1765787951741482914, guid: 64507e70c8b123645909188a9eb0a312, type: 3}
       propertyPath: m_Name
-      value: StatButton (5)
+      value: Range
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -699,7 +699,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1765787951741482914, guid: 64507e70c8b123645909188a9eb0a312, type: 3}
       propertyPath: m_Name
-      value: StatButton
+      value: Health
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -801,7 +801,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1765787951741482914, guid: 64507e70c8b123645909188a9eb0a312, type: 3}
       propertyPath: m_Name
-      value: StatButton (2)
+      value: APS
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -903,7 +903,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1765787951741482914, guid: 64507e70c8b123645909188a9eb0a312, type: 3}
       propertyPath: m_Name
-      value: StatButton (4)
+      value: Speed
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1005,7 +1005,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1765787951741482914, guid: 64507e70c8b123645909188a9eb0a312, type: 3}
       propertyPath: m_Name
-      value: StatButton (3)
+      value: DPS
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1107,7 +1107,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1765787951741482914, guid: 64507e70c8b123645909188a9eb0a312, type: 3}
       propertyPath: m_Name
-      value: StatButton (1)
+      value: DMG
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1209,7 +1209,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1765787951741482914, guid: 64507e70c8b123645909188a9eb0a312, type: 3}
       propertyPath: m_Name
-      value: StatButton (6)
+      value: Cooldown
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
