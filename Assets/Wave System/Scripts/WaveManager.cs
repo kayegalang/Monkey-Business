@@ -16,7 +16,7 @@ namespace Wave_System.Scripts
         [SerializeField] private Transform enemyParent; 
         
         [Header("Background")]
-        [SerializeField] private Vector3 backgroundPosition = new Vector3(0, 0, 10); 
+        [SerializeField] private Vector3 backgroundPosition = new Vector3(0, 7.29f, 10); 
         
         [Header("Debug")]
         [SerializeField] private bool showDebugLogs = true;
@@ -176,7 +176,7 @@ namespace Wave_System.Scripts
             
             float spawnX = cameraPos.x - wave.spawnDistanceFromCamera;
             
-            return new Vector3(spawnX, -4, 0);
+            return new Vector3(spawnX, 0, 0);
         }
         
         void OnWaveComplete()

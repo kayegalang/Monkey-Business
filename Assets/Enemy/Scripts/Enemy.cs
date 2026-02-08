@@ -72,18 +72,13 @@ namespace Enemy.Scripts
 
         private void PlayWalkingSound()
         {
-            if (walkingAudioSource != null && !walkingAudioSource.isPlaying)
-            {
-                walkingAudioSource.Play();
-            }
+            AudioManager.Instance.PlayWalkingSound();
         }
 
         private void StopWalkingSound()
         {
-            if (walkingAudioSource != null && walkingAudioSource.isPlaying)
-            {
-                walkingAudioSource.Stop();
-            }
+            AudioManager.Instance.StopWalkingSound();
+
         }
 
         void InitializeEnemy()

@@ -46,7 +46,7 @@ MonoBehaviour:
     baseCost: 0
     costGrowth: 1
   range:
-    baseValue: 5
+    baseValue: 1
     addPerLevel: 0.2
     multPerLevel: 1
     baseCost: 35
