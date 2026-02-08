@@ -1,4 +1,3 @@
-// UIButtonManager.cs
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -12,14 +11,25 @@ public class UIButtonManager : MonoBehaviour
     {
         if (Instance != null && Instance != this)
         {
+            Debug.LogWarning("Duplicate UIButtonManager found! Destroying this one.");
             Destroy(gameObject);
             return;
         }
 
         Instance = this;
+        
+        // IMPORTANT: Move to root if nested
+        if (transform.parent != null)
+        {
+            Debug.LogWarning("UIButtonManager was nested under another GameObject. Moving to root for DontDestroyOnLoad.");
+            transform.SetParent(null);
+        }
+        
         DontDestroyOnLoad(gameObject);
 
         SceneManager.sceneLoaded += OnSceneLoaded;
+        
+        Debug.Log("✓ UIButtonManager initialized and set to DontDestroyOnLoad");
     }
 
     private void OnDestroy()
@@ -29,6 +39,8 @@ public class UIButtonManager : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        Debug.Log($"UIButtonManager wiring buttons in scene: {scene.name}");
+        
         WireButton("StartButton", OnStartButtonClick);
         WireButton("PauseButton", OnPauseButtonClick);
         WireButton("ResumeButton", OnResumeButtonClick);
@@ -41,44 +53,74 @@ public class UIButtonManager : MonoBehaviour
         GameObject obj = GameObject.Find(buttonName);
         if (obj == null)
         {
-            Debug.LogWarning($"Button '{buttonName}' not found!");
-            return;
+            return; // Button not in this scene
         }
 
         Button button = obj.GetComponent<Button>();
+        if (button == null)
+        {
+            Debug.LogWarning($"Button component not found on '{buttonName}'!");
+            return;
+        }
+
+        // Remove existing listeners to avoid duplicates
+        button.onClick.RemoveAllListeners();
         button.onClick.AddListener(action);
-        Debug.Log($"Wired: {buttonName}");
+        
+        // Add animation component
+        ButtonAnimator animator = obj.GetComponent<ButtonAnimator>();
+        if (animator == null)
+        {
+            obj.AddComponent<ButtonAnimator>();
+        }
+        
+        Debug.Log($"✓ Wired button: {buttonName}");
     }
 
     public void OnMenuButtonClick()
     {
-        Debug.Log("button clicked, attempting to change state to start");
+        Debug.Log("Menu button clicked");
+        
+        if (GameSceneManager.Instance == null)
+        {
+            Debug.LogError("❌ GameSceneManager.Instance is NULL!");
+            return;
+        }
+        
+        Debug.Log("Calling ChangeState(Start)...");
         GameSceneManager.Instance.ChangeState(GameSceneManager.State.Start);
     }
 
-    // --- Main Menu ---
     public void OnStartButtonClick()
     {
-        GameSceneManager.Instance.ChangeState(GameSceneManager.State.Battle);
+        Debug.Log("Start button clicked");
+        if (GameSceneManager.Instance != null)
+            GameSceneManager.Instance.ChangeState(GameSceneManager.State.Battle);
+        else
+            Debug.LogError("❌ GameSceneManager.Instance is NULL!");
     }
 
-    // --- Pause Menu ---
     public void OnPauseButtonClick()
     {
-        Debug.Log("Game is in paused state");
-        GameSceneManager.Instance.ChangeState(GameSceneManager.State.Pause);
+        Debug.Log("Pause button clicked");
+        if (GameSceneManager.Instance != null)
+            GameSceneManager.Instance.ChangeState(GameSceneManager.State.Pause);
+        else
+            Debug.LogError("❌ GameSceneManager.Instance is NULL!");
     }
 
     public void OnResumeButtonClick()
     {
-        Debug.Log("Game resumed");
-        GameSceneManager.Instance.ChangeState(GameSceneManager.State.Battle);
+        Debug.Log("Resume button clicked");
+        if (GameSceneManager.Instance != null)
+            GameSceneManager.Instance.ChangeState(GameSceneManager.State.Battle);
+        else
+            Debug.LogError("❌ GameSceneManager.Instance is NULL!");
     }
 
-    // --- Shared ---
     public void OnQuitButtonClick()
     {
-        Debug.Log("button clicked, attempting Game quit");
+        Debug.Log("Quit button clicked");
         #if UNITY_EDITOR
         EditorApplication.isPlaying = false;
         #else
