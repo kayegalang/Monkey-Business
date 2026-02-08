@@ -119,60 +119,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &16339574
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 16339576}
-  - component: {fileID: 16339575}
-  m_Layer: 0
-  m_Name: ResetUpgradesOnPlay
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &16339575
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 16339574}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fbb9db2d9e5fa40f2921871ffb7a1876, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ResetUpgradesOnPlay
-  wallet: {fileID: 11400000, guid: c7d9563f1e84cac438e4789b972fd0fc, type: 2}
-  upgrades:
-  - {fileID: 11400000, guid: 5c96cca5f8a1cc2469021856e8aa8c33, type: 2}
-  - {fileID: 11400000, guid: 8ec762f6d31f6ab4b9e767497d6b1a24, type: 2}
-  - {fileID: 11400000, guid: a16a5d4f2ffebeb4587cec95ec800fc5, type: 2}
-  - {fileID: 11400000, guid: e4f83516ac1844b4d9b890e39e238af8, type: 2}
-  - {fileID: 11400000, guid: 31f66643fc4f72c44a835723be0b1a52, type: 2}
-  - {fileID: 11400000, guid: d5ddec76a59ef6345bc0ceef52fd47c9, type: 2}
-  - {fileID: 11400000, guid: ea5a7b09fffabab43ba71ae82a77df1c, type: 2}
-  - {fileID: 11400000, guid: 2b0d4eed91be0314681f605e53c6ef61, type: 2}
---- !u!4 &16339576
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 16339574}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.2916, y: -4, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &253918453
 GameObject:
   m_ObjectHideFlags: 0
@@ -467,58 +413,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1076437066
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1076437068}
-  - component: {fileID: 1076437067}
-  m_Layer: 0
-  m_Name: TestingResetHelper
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1076437067
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1076437066}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 87f08818b723d47d08499d0929e11bbd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TestingResetHelper
-  resetOnPlay: 1
-  resetOnSceneLoad: 0
-  resetHotkey: 114
-  resetMonkeyProgress: 1
-  resetBananaWallet: 1
-  giveStartingBananas: 1
-  startingBananas: 10000
-  wallet: {fileID: 0}
---- !u!4 &1076437068
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1076437066}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.2916, y: -4, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1162755648
 GameObject:
   m_ObjectHideFlags: 0
@@ -598,64 +492,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1170806534
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1170806536}
-  - component: {fileID: 1170806535}
-  m_Layer: 0
-  m_Name: MonkeyStatsManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1170806535
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1170806534}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2dbcee66e3bb4bc78713517f9741868, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MonkeyStatsManager
-  wallet: {fileID: 11400000, guid: c7d9563f1e84cac438e4789b972fd0fc, type: 2}
-  healthConfig: {fileID: 11400000, guid: d5ddec76a59ef6345bc0ceef52fd47c9, type: 2}
-  damageConfig: {fileID: 11400000, guid: e4f83516ac1844b4d9b890e39e238af8, type: 2}
-  apsConfig: {fileID: 11400000, guid: 5c96cca5f8a1cc2469021856e8aa8c33, type: 2}
-  dpsConfig: {fileID: 11400000, guid: 31f66643fc4f72c44a835723be0b1a52, type: 2}
-  speedConfig: {fileID: 11400000, guid: 2b0d4eed91be0314681f605e53c6ef61, type: 2}
-  rangeConfig: {fileID: 11400000, guid: ea5a7b09fffabab43ba71ae82a77df1c, type: 2}
-  evolutionConfig: {fileID: 11400000, guid: 8ec762f6d31f6ab4b9e767497d6b1a24, type: 2}
-  baseLevelUpCost: 20
-  levelUpCostMultiplier: 1.25
-  debugHealthLevel: 0
-  debugDamageLevel: 0
-  debugMonkeyLevel: 0
-  debugCurrentForm: 
---- !u!4 &1170806536
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1170806534}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.2916, y: -4, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!224 &1239419283 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6166952652957738387, guid: f54a46b63d043f943ba18c2c6ba21b69, type: 3}
@@ -672,52 +508,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
---- !u!1 &1776334821
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1776334823}
-  - component: {fileID: 1776334822}
-  m_Layer: 0
-  m_Name: DebugCheats
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1776334822
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1776334821}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a7f17f697fc6d443c9ceb6128c52617d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DebugCheats
-  wallet: {fileID: 11400000, guid: c7d9563f1e84cac438e4789b972fd0fc, type: 2}
-  addAmount: 99999
---- !u!4 &1776334823
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1776334821}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.2916, y: -4, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1138338453904535678
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1707,7 +1497,3 @@ SceneRoots:
   - {fileID: 253918455}
   - {fileID: 1144252625754659704}
   - {fileID: 1162755651}
-  - {fileID: 1776334823}
-  - {fileID: 16339576}
-  - {fileID: 1170806536}
-  - {fileID: 1076437068}

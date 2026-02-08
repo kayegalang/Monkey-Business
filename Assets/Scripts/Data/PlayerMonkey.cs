@@ -3,8 +3,8 @@ using System.Collections;
 using Audio.Scripts;
 
 /// <summary>
-/// Player Monkey - Simplified to match Enemy pattern
-/// No AttackPoint needed - just detects enemies in range!
+/// Player Monkey - DPS is now purely calculated (Damage × APS)
+/// DPS upgrade button just increases attack speed!
 /// </summary>
 public class PlayerMonkey : MonoBehaviour
 {
@@ -29,11 +29,14 @@ public class PlayerMonkey : MonoBehaviour
     // Current stats (updated from MonkeyStatsManager)
     private float maxHealth;
     private float currentHealth;
-    private float baseDamage;
-    private float attacksPerSecond;
-    private float bonusDPS;
+    private float damage;           // Damage per hit
+    private float attacksPerSecond; // Attacks per second
     private float moveSpeed;
     private float attackRange;
+    
+    // Derived stats
+    private float dps;              // Calculated: damage × attacksPerSecond
+    private float attackCooldown;   // Calculated: 1 / attacksPerSecond
     
     // State
     private enum State { Moving, Fighting }
@@ -41,7 +44,6 @@ public class PlayerMonkey : MonoBehaviour
     
     // Combat
     private Transform currentTarget;
-    private float attackCooldown;
     private float nextAttackTime;
     
     void Start()
@@ -70,16 +72,19 @@ public class PlayerMonkey : MonoBehaviour
     {
         if (MonkeyStatsManager.Instance == null) return;
         
+        // Get base stats
         maxHealth = MonkeyStatsManager.Instance.GetCurrentHealth();
-        baseDamage = MonkeyStatsManager.Instance.GetCurrentDamage();
+        damage = MonkeyStatsManager.Instance.GetCurrentDamage();
         attacksPerSecond = MonkeyStatsManager.Instance.GetCurrentAttackSpeed();
-        bonusDPS = MonkeyStatsManager.Instance.GetCurrentDPS();
         moveSpeed = MonkeyStatsManager.Instance.GetCurrentMoveSpeed();
         attackRange = MonkeyStatsManager.Instance.GetCurrentRange();
         
+        // Calculate derived stats
+        dps = MonkeyStatsManager.Instance.GetCurrentDPS(); // Damage × APS
         attackCooldown = attacksPerSecond > 0 ? 1f / attacksPerSecond : 1f;
         
-        Debug.Log($"Player stats updated: HP:{maxHealth}, DMG:{baseDamage}, APS:{attacksPerSecond}, DPS:{bonusDPS}, Speed:{moveSpeed}, Range:{attackRange}");
+        Debug.Log($"Player stats updated: HP:{maxHealth}, DMG:{damage}, APS:{attacksPerSecond}, DPS:{dps:F1}, Speed:{moveSpeed}, Range:{attackRange}");
+        Debug.Log($"Attack cooldown: {attackCooldown:F2}s (attacking {attacksPerSecond:F2} times per second)");
     }
     
     void OnEvolved()
@@ -137,7 +142,6 @@ public class PlayerMonkey : MonoBehaviour
     
     void CheckForEnemy()
     {
-        // Use Raycast like Enemy does, but facing left
         RaycastHit2D hit = Physics2D.Raycast(
             transform.position,
             Vector2.left,
@@ -186,15 +190,13 @@ public class PlayerMonkey : MonoBehaviour
     {
         if (currentTarget == null) return;
         
-        // Calculate total damage (Damage + DPS bonus!)
-        float totalDamage = baseDamage + (bonusDPS / 5);
+        float totalDamage = damage;
         
-        // Deal damage to enemy
         var enemy = currentTarget.GetComponent<Enemy.Scripts.Enemy>();
         if (enemy != null)
         {
             enemy.TakeDamage(totalDamage);
-            Debug.Log($"Player attacks for {totalDamage} damage! (Base:{baseDamage} + DPS:{bonusDPS})");
+            Debug.Log($"Player attacks for {totalDamage} damage! (Cooldown: {attackCooldown:F2}s, DPS: {dps:F1})");
         }
         
         TriggerAttackAnimation();
@@ -267,7 +269,6 @@ public class PlayerMonkey : MonoBehaviour
     {
         Debug.Log("Player monkey died!");
         
-        // Stop all sounds
         StopWalkingSound();
         if (currentAttackSource != null)
         {
@@ -304,7 +305,6 @@ public class PlayerMonkey : MonoBehaviour
         yield return new WaitForSeconds(2f);
         Debug.Log("GAME OVER!");
         
-        // Trigger game over state
         // GameSceneManager.Instance?.ChangeState(GameSceneManager.State.GameOver);
     }
     
