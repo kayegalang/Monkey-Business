@@ -29,16 +29,7 @@ public class UIButtonManager : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        switch (scene.name)
-        {
-            case "BattleScene":
-                WireBattleButtons();
-                break;
-        }
-    }
-
-    private void WireBattleButtons()
-    {
+        WireButton("StartButton", OnStartButtonClick);
         WireButton("PauseButton", OnPauseButtonClick);
         WireButton("ResumeButton", OnResumeButtonClick);
         WireButton("QuitButton", OnQuitButtonClick);
@@ -61,6 +52,7 @@ public class UIButtonManager : MonoBehaviour
 
     public void OnMenuButtonClick()
     {
+        Debug.Log("button clicked, attempting to change state to start");
         GameSceneManager.Instance.ChangeState(GameSceneManager.State.Start);
     }
 
@@ -86,6 +78,7 @@ public class UIButtonManager : MonoBehaviour
     // --- Shared ---
     public void OnQuitButtonClick()
     {
+        Debug.Log("button clicked, attempting Game quit");
         #if UNITY_EDITOR
         EditorApplication.isPlaying = false;
         #else
