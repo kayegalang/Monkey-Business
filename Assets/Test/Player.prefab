@@ -161,6 +161,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4adacb7db291d4f13a29abe58631841d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy.Test.PlayerHealth
-  maxHealth: 10
+  maxHealth: 34.6
   animator: {fileID: 0}
   healthBarUI: {fileID: 0}

@@ -1,4 +1,5 @@
 using System.Collections;
+using Audio.Scripts;
 using Enemy.Test;
 using UnityEngine;
 
@@ -6,90 +7,123 @@ namespace Enemy.Scripts
 {
     public class Enemy : MonoBehaviour
     {
-        [Header("Enemy Configuration")]
+        [Header("Enemy Configuration")] 
         public EnemyData enemyData;
-        
-        [Header("Currency")]
+
+        [Header("Currency")] 
         [SerializeField] private BananaWallet wallet;
-        
-        [Header("References")]
+
+        [Header("References")] 
         [SerializeField] private SpriteRenderer spriteRenderer;
         [SerializeField] private Animator animator;
-        
-        [Header("Health Bar")]
-        [SerializeField] private GameObject healthBarPrefab; 
+
+        [Header("Health Bar")] 
+        [SerializeField] private GameObject healthBarPrefab;
+
+        [SerializeField] private Vector3 healthBarOffset;
         private EnemyHealthBar healthBar;
-        
+
         // States
-        private enum EnemyState { Moving, Fighting }
+        private enum EnemyState
+        {
+            Moving,
+            Fighting
+        }
+
         private EnemyState currentState = EnemyState.Moving;
-        
+
         // Combat
         private float currentHealth;
         private float nextAttackTime;
         private Transform player;
         private Coroutine flashCoroutine;
         private Color originalColor;
-        
+
         [SerializeField] private LayerMask playerLayer;
-        
+
+        // Audio
+        [SerializeField] private AudioClipData hitSound;
+        [SerializeField] private AudioClipData deathSound;
+        [SerializeField] private AudioSource walkingAudioSource;
+        private AudioSource currentAttackSource;
+
         void Start()
         {
             InitializeEnemy();
         }
-        
+
         void Update()
         {
             switch (currentState)
             {
                 case EnemyState.Moving:
+                    PlayWalkingSound();
                     MoveRight();
                     CheckForPlayer();
                     break;
-                    
+
                 case EnemyState.Fighting:
+                    StopWalkingSound();
                     FightPlayer();
                     break;
             }
         }
-        
+
+        private void PlayWalkingSound()
+        {
+            if (walkingAudioSource != null && !walkingAudioSource.isPlaying)
+            {
+                walkingAudioSource.Play();
+            }
+        }
+
+        private void StopWalkingSound()
+        {
+            if (walkingAudioSource != null && walkingAudioSource.isPlaying)
+            {
+                walkingAudioSource.Stop();
+            }
+        }
+
         void InitializeEnemy()
         {
             currentHealth = enemyData.health;
             
+            healthBarOffset = enemyData.healthBarOffset;
+
             if (spriteRenderer != null && enemyData.enemySprite != null)
             {
                 spriteRenderer.sprite = enemyData.enemySprite;
-                GenerateCollider();
             }
-            
+
             if (animator != null && enemyData.animatorController != null)
             {
                 animator.runtimeAnimatorController = enemyData.animatorController;
             }
             
+            GenerateCollider();
+
             nextAttackTime = Time.time;
-            
             SpawnHealthBar();
-            
             originalColor = spriteRenderer.color;
         }
-        
+
         void SpawnHealthBar()
         {
             if (healthBarPrefab != null)
             {
-                GameObject healthBarObj = Instantiate(healthBarPrefab, transform.position, Quaternion.identity);
-                healthBar = healthBarObj.GetComponent<EnemyHealthBar>();
-                
-                if (healthBar != null)
-                {
-                    healthBar.SetTarget(transform);
-                    healthBar.UpdateHealth(currentHealth, enemyData.health);
-                }
+                GameObject healthBarsParent = GameObject.Find("HealthBars");
+
+                GameObject barGO = Instantiate(
+                    healthBarPrefab,
+                    healthBarsParent.transform
+                );
+
+                healthBar = barGO.GetComponent<EnemyHealthBar>();
+                healthBar.SetTarget(transform, healthBarOffset);
             }
         }
-        
+
         void GenerateCollider()
         {
             gameObject.AddComponent<PolygonCollider2D>();
@@ -98,7 +132,6 @@ namespace Enemy.Scripts
         void MoveRight()
         {
             transform.Translate(Vector2.right * enemyData.speed * Time.deltaTime);
-
             StartWalkingAnimation();
         }
 
@@ -129,7 +162,6 @@ namespace Enemy.Scripts
         void EnterCombat()
         {
             currentState = EnemyState.Fighting;
-            
             StopWalkingAnimation();
         }
 
@@ -168,6 +200,16 @@ namespace Enemy.Scripts
             }
             
             TriggerAttackAnimation();
+            PlayAttackSound();
+        }
+
+        private void PlayAttackSound()
+        {
+            if (hitSound != null)
+            {
+                // Store the AudioSource reference!
+                currentAttackSource = AudioManager.Instance.PlaySound(hitSound);
+            }
         }
 
         private void TriggerAttackAnimation()
@@ -181,11 +223,8 @@ namespace Enemy.Scripts
         public void TakeDamage(float damage)
         {
             currentHealth -= damage;
-
             FlashRed();
-            
             UpdateHealthBar();
-            
             TriggerHurtAnimation();
             
             if (currentHealth <= 0)
@@ -209,9 +248,7 @@ namespace Enemy.Scripts
         private IEnumerator FlashCoroutine()
         {
             spriteRenderer.color = Color.red;
-            
             yield return new WaitForSeconds(0.2f);
-            
             spriteRenderer.color = originalColor;
         }
 
@@ -225,11 +262,20 @@ namespace Enemy.Scripts
 
         private void TriggerHurtAnimation()
         {
-            
+            // Animation trigger if needed
         }
 
         void Die()
         {
+            // STOP ALL ENEMY SOUNDS IMMEDIATELY!
+            StopWalkingSound();
+            
+            // Stop attack sound using stored reference
+            if (currentAttackSource != null)
+            {
+                currentAttackSource.Stop();
+            }
+            
             if (healthBar != null)
             {
                 Destroy(healthBar.gameObject);
@@ -237,13 +283,30 @@ namespace Enemy.Scripts
             
             spriteRenderer.color = originalColor;
             
-            StopCoroutine(flashCoroutine);
+            if (flashCoroutine != null)
+            {
+                StopCoroutine(flashCoroutine);
+            }
             
             TriggerDeathAnimation();
-
+            
+            // Small delay before death sound for clarity
+            StartCoroutine(PlayDeathSoundDelayed());
+            
             DropBananas();
             
             Destroy(gameObject, 1.07f);
+        }
+
+        private IEnumerator PlayDeathSoundDelayed()
+        {
+            // Wait just a tiny bit to ensure attack sound stops
+            yield return new WaitForSeconds(0.05f);
+            
+            if (deathSound != null)
+            {
+                AudioManager.Instance.PlaySound(deathSound);
+            }
         }
 
         private void TriggerDeathAnimation()
