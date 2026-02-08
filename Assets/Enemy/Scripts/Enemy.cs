@@ -1,3 +1,4 @@
+using Audio.Scripts;
 using Enemy.Test;
 using UnityEngine;
 
@@ -26,6 +27,11 @@ namespace Enemy.Scripts
         private Transform player;
         
         [SerializeField] private LayerMask playerLayer;
+        
+        // Audio
+        [SerializeField] private AudioClipData walkSound;
+        [SerializeField] private AudioClipData hitSound;
+        [SerializeField] private AudioClipData deathSound;
         
         void Start()
         {
@@ -90,8 +96,15 @@ namespace Enemy.Scripts
         void MoveRight()
         {
             transform.Translate(Vector2.right * enemyData.speed * Time.deltaTime);
-
+            
             StartWalkingAnimation();
+
+            PlayWalkingSound();
+        }
+
+        private void PlayWalkingSound()
+        {
+            AudioManager.Instance.PlaySound(walkSound);
         }
 
         private void StartWalkingAnimation()
@@ -160,6 +173,13 @@ namespace Enemy.Scripts
             }
             
             TriggerAttackAnimation();
+
+            PlayAttackSound();
+        }
+
+        private void PlayAttackSound()
+        {
+            AudioManager.Instance.PlaySound(hitSound);        
         }
 
         private void TriggerAttackAnimation()
@@ -176,8 +196,6 @@ namespace Enemy.Scripts
             
             UpdateHealthBar();
             
-            TriggerHurtAnimation();
-            
             if (currentHealth <= 0)
             {
                 Die();
@@ -192,11 +210,6 @@ namespace Enemy.Scripts
             }
         }
 
-        private void TriggerHurtAnimation()
-        {
-            
-        }
-
         void Die()
         {
             if (healthBar != null)
@@ -206,9 +219,16 @@ namespace Enemy.Scripts
             
             TriggerDeathAnimation();
 
+            PlayDeathSound();
+
             DropBananas();
             
             Destroy(gameObject, 0.5f);
+        }
+
+        private void PlayDeathSound()
+        {
+            AudioManager.Instance.PlaySound(deathSound);
         }
 
         private void TriggerDeathAnimation()
