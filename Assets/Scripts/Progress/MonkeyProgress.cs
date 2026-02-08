@@ -12,7 +12,6 @@ public class MonkeyProgress
     public int apsLvl;
     public int speedLvl;
     public int rangeLvl;
-    public int cooldownLvl;
 
     // optional "prestige" / monkey level concept that resets progress
     public int monkeyLevel;
@@ -24,7 +23,6 @@ public class MonkeyProgress
         MonkeyStatId.AttacksPerSecond => apsLvl,
         MonkeyStatId.MoveSpeed => speedLvl,
         MonkeyStatId.Range => rangeLvl,
-        MonkeyStatId.Cooldown => cooldownLvl,
         _ => 0
     };
 
@@ -38,13 +36,12 @@ public class MonkeyProgress
             case MonkeyStatId.AttacksPerSecond: apsLvl = value; break;
             case MonkeyStatId.MoveSpeed: speedLvl = value; break;
             case MonkeyStatId.Range: rangeLvl = value; break;
-            case MonkeyStatId.Cooldown: cooldownLvl = value; break;
         }
     }
 
     public void ResetUpgrades()
     {
-        healthLvl = damageLvl = apsLvl = speedLvl = rangeLvl = cooldownLvl = 0;
+        healthLvl = damageLvl = apsLvl = speedLvl = rangeLvl = 0;
     }
 }
 
