@@ -48,9 +48,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Enemy.Scripts.Enemy
   enemyData: {fileID: 11400000, guid: 9863c5c1d4e062142ba407a13149f33f, type: 2}
   wallet: {fileID: 11400000, guid: c7d9563f1e84cac438e4789b972fd0fc, type: 2}
+  bananaPrefab: {fileID: 5192200890419750454, guid: 4617fd99a47660b43aec903b7c0f13eb, type: 3}
   spriteRenderer: {fileID: 7742227061043792290}
   animator: {fileID: 4019196305150834199}
   healthBarPrefab: {fileID: 3704040301294740266, guid: 9652f16c5ec9b4679ad6965cac7c5c21, type: 3}
+  healthBarOffset: {x: 0, y: 0, z: 0}
   playerLayer:
     serializedVersion: 2
     m_Bits: 64

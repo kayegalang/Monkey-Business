@@ -12,6 +12,7 @@ namespace Enemy.Scripts
 
         [Header("Currency")] 
         [SerializeField] private BananaWallet wallet;
+        [SerializeField] private GameObject bananaPrefab; 
 
         [Header("References")] 
         [SerializeField] private SpriteRenderer spriteRenderer;
@@ -322,6 +323,8 @@ namespace Enemy.Scripts
             if (wallet != null)
             {
                 wallet.Add(enemyData.currencyAmount);
+                if (bananaPrefab != null)
+                    Instantiate(bananaPrefab, transform.position, Quaternion.identity);
                 Debug.Log("Dropped " + enemyData.currencyAmount + " bananas");
             }
             else
