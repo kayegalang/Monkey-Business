@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb36cda3c666ec44db7745d5914b79ab, type: 3}
   m_Name: MonkeyDatabase
   m_EditorClassIdentifier: Assembly-CSharp::MonkeyDatabase
-  monkeys: []
+  monkeys:
+  - {fileID: 0}
