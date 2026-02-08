@@ -29,13 +29,14 @@ namespace Enemy.Scripts
         [SerializeField] private LayerMask playerLayer;
         
         // Audio
-        [SerializeField] private AudioClipData walkSound;
+        [SerializeField] private AudioSource walkSoundSource;
         [SerializeField] private AudioClipData hitSound;
         [SerializeField] private AudioClipData deathSound;
         
         void Start()
         {
             InitializeEnemy();
+            PlayWalkingSound();
         }
         
         void Update()
@@ -98,13 +99,11 @@ namespace Enemy.Scripts
             transform.Translate(Vector2.right * enemyData.speed * Time.deltaTime);
             
             StartWalkingAnimation();
-
-            PlayWalkingSound();
         }
 
         private void PlayWalkingSound()
         {
-            AudioManager.Instance.PlaySound(walkSound);
+            walkSoundSource.Play();
         }
 
         private void StartWalkingAnimation()
@@ -136,6 +135,13 @@ namespace Enemy.Scripts
             currentState = EnemyState.Fighting;
             
             StopWalkingAnimation();
+            
+            StopWalkingSound();
+        }
+
+        private void StopWalkingSound()
+        {
+            walkSoundSource.Stop();
         }
 
         private void StopWalkingAnimation()
@@ -152,6 +158,7 @@ namespace Enemy.Scripts
             {
                 player = null;
                 currentState = EnemyState.Moving;
+                PlayWalkingSound();
                 return;
             }
             

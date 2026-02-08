@@ -18,5 +18,5 @@ MonoBehaviour:
   pitch: 1
   randomizePitch: 1
   pitchVariation: 0.1
-  loop: 0
+  loop: 1
   maxDistance: 50
