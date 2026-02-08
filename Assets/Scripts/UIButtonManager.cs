@@ -42,6 +42,7 @@ public class UIButtonManager : MonoBehaviour
         WireButton("PauseButton", OnPauseButtonClick);
         WireButton("ResumeButton", OnResumeButtonClick);
         WireButton("QuitButton", OnQuitButtonClick);
+        WireButton("MenuButton", OnMenuButtonClick);
     }
 
     private void WireButton(string buttonName, UnityEngine.Events.UnityAction action)
@@ -56,6 +57,11 @@ public class UIButtonManager : MonoBehaviour
         Button button = obj.GetComponent<Button>();
         button.onClick.AddListener(action);
         Debug.Log($"Wired: {buttonName}");
+    }
+
+    public void OnMenuButtonClick()
+    {
+        GameSceneManager.Instance.ChangeState(GameSceneManager.State.Start);
     }
 
     // --- Main Menu ---
