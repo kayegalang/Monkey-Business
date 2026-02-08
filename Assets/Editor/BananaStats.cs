@@ -6,6 +6,7 @@ public static class BananaStats
     [MenuItem("Tools/Bananas/Write All Banana Stats")]
     static void WriteAll()
     {
+
         Write(
             id: "bananemy",
             name: "bananemy",
@@ -18,9 +19,9 @@ public static class BananaStats
         );
 
         Write(
-            id: "unripe_bananemy",
-            name: "unripe bananemy",
-            path: "Assets/Enemy/EnemyData/unripe_bananemy.asset",
+            id: "ripe_banana",
+            name: "ripe banana",
+            path: "Assets/Enemy/EnemyData/ripe_banana.asset",
             health: 12f,
             damage: 1.5f,
             cooldown: 0.6f,
@@ -29,9 +30,9 @@ public static class BananaStats
         );
 
         Write(
-            id: "long_bananemy",
-            name: "long bananemy",
-            path: "Assets/Enemy/EnemyData/long_bananemy.asset",
+            id: "rotton_bananemy",
+            name: "rotton bananemy",
+            path: "Assets/Enemy/EnemyData/rotton_bananemy.asset",
             health: 8f,
             damage: 2.5f,
             cooldown: 0.7f,
