@@ -3,11 +3,10 @@ using UnityEngine.SceneManagement;
 
 public class GameSceneManager : MonoBehaviour
 {
-    // Keep scene names in one place to avoid typos
     private const string START_SCENE = "StartScene";
     private const string BATTLE_SCENE = "BattleScene";
     private const string GAMEOVER_SCENE = "GameOverScene";
-    private const string WIN_SCENE = "WinScene"; // <-- create/use this scene name
+    private const string WIN_SCENE = "WinScene";
 
     public enum State { Start, Battle, Pause, GameOver, Win }
     public State state;
@@ -18,13 +17,13 @@ public class GameSceneManager : MonoBehaviour
     [SerializeField] private BananaWallet wallet;
     [SerializeField] private UpgradeStat[] allUpgrades;
 
-    private GameObject pauseShadePanel;
+    [Header("UI References - Assign in Inspector")]
+    [SerializeField] private GameObject pauseShadePanel;
 
     private void Awake()
     {
         if (Instance != null && Instance != this)
         {
-            Debug.LogWarning("Duplicate GameSceneManager found! Destroying this one.");
             Destroy(gameObject);
             return;
         }
@@ -33,14 +32,13 @@ public class GameSceneManager : MonoBehaviour
 
         if (transform.parent != null)
         {
-            Debug.LogWarning("GameSceneManager was nested under another GameObject. Moving to root for DontDestroyOnLoad.");
             transform.SetParent(null);
         }
 
         DontDestroyOnLoad(gameObject);
         SceneManager.sceneLoaded += OnSceneLoaded;
 
-        Debug.Log("✓ GameSceneManager initialized and set to DontDestroyOnLoad");
+        Debug.Log("✓ GameSceneManager initialized");
     }
 
     private void Start()
@@ -50,40 +48,43 @@ public class GameSceneManager : MonoBehaviour
 
     public void ChangeState(State newState)
     {
-        Debug.Log($"ChangeState called: {state} → {newState}");
+        Debug.Log($"ChangeState: {state} → {newState}");
         state = newState;
 
         switch (newState)
         {
             case State.Start:
+                Time.timeScale = 1f;
                 LoadIfNotActive(START_SCENE);
                 break;
 
             case State.Battle:
                 if (SceneManager.GetActiveScene().name != BATTLE_SCENE)
                 {
-                    Debug.Log("Loading BattleScene...");
+                    Time.timeScale = 1f;
                     ResetAllData();
                     SceneManager.LoadScene(BATTLE_SCENE);
                 }
                 else
                 {
-                    // If already in battle, unpause
+                    // Unpause
+                    Time.timeScale = 1f;
                     SetPausePanel(false);
                 }
                 break;
 
             case State.Pause:
+                Time.timeScale = 0f;
                 SetPausePanel(true);
                 break;
 
             case State.GameOver:
-                Debug.Log("Loading GameOverScene...");
+                Time.timeScale = 1f;
                 SceneManager.LoadScene(GAMEOVER_SCENE);
                 break;
 
             case State.Win:
-                Debug.Log("Loading WinScene...");
+                Time.timeScale = 1f;
                 SceneManager.LoadScene(WIN_SCENE);
                 break;
         }
@@ -93,7 +94,6 @@ public class GameSceneManager : MonoBehaviour
     {
         if (SceneManager.GetActiveScene().name != sceneName)
         {
-            Debug.Log($"Loading {sceneName}...");
             SceneManager.LoadScene(sceneName);
         }
     }
@@ -102,10 +102,8 @@ public class GameSceneManager : MonoBehaviour
     {
         if (Instance == this)
         {
-            Debug.Log("GameSceneManager destroyed!");
             Instance = null;
         }
-
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
@@ -113,56 +111,64 @@ public class GameSceneManager : MonoBehaviour
     {
         Debug.Log($"Scene loaded: {scene.name}");
 
-        switch (scene.name)
+        // Find pause panel in BattleScene
+        if (scene.name == BATTLE_SCENE)
         {
-            case BATTLE_SCENE:
+            if (pauseShadePanel == null)
+            {
                 pauseShadePanel = GameObject.Find("PauseShadePanel");
-                Invoke(nameof(HidePausePanel), 0.1f);
-                break;
-
-            // Any non-battle scenes should not keep a pause panel reference
-            case START_SCENE:
-            case GAMEOVER_SCENE:
-            case WIN_SCENE:
-                pauseShadePanel = null;
-                break;
+                if (pauseShadePanel != null)
+                {
+                    Debug.Log("✓ Found PauseShadePanel");
+                }
+            }
+            
+            // Make sure it starts hidden
+            if (pauseShadePanel != null)
+            {
+                pauseShadePanel.SetActive(false);
+            }
         }
-    }
-
-    private void HidePausePanel()
-    {
-        if (pauseShadePanel != null)
-            pauseShadePanel.SetActive(false);
     }
 
     private void ResetAllData()
     {
         if (wallet != null)
             wallet.Reset();
-
-        // If you later want “upgrades reset on battle start”, do it here too.
-        // (Your current code only resets wallet.)
     }
 
     private void SetPausePanel(bool active)
     {
         if (pauseShadePanel == null)
         {
-            Debug.LogWarning("PauseShadePanel not found!");
+            Debug.LogWarning("PauseShadePanel reference is null!");
             return;
         }
 
         pauseShadePanel.SetActive(active);
+        Debug.Log($"PauseShadePanel set to: {active}");
     }
 
-    // Convenience methods so other scripts don’t need to know enum names
+    // Public methods for buttons to call
+    public void StartGame() => ChangeState(State.Battle);
+    public void PauseGame() => ChangeState(State.Pause);
+    public void ResumeGame() => ChangeState(State.Battle);
+    public void GoToMenu() => ChangeState(State.Start);
     public void WinGame() => ChangeState(State.Win);
     public void LoseGame() => ChangeState(State.GameOver);
+    
+    public void QuitGame()
+    {
+        #if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+        #else
+        Application.Quit();
+        #endif
+    }
 
     public void SetupReferences(BananaWallet walletRef, UpgradeStat[] upgradesRef)
     {
         wallet = walletRef;
         allUpgrades = upgradesRef;
-        Debug.Log($"References set: Wallet={wallet != null}, Upgrades={upgradesRef?.Length ?? 0}");
     }
 }
