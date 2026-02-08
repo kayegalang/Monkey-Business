@@ -53,6 +53,7 @@ public class ClassUpButton : MonoBehaviour
         
         if (MonkeyStatsManager.Instance.TryEvolve())
         {
+            StatPopupSpawner.Instance?.Spawn(StatPopupSpawner.PopupType.ClassUp, transform.position);
             Debug.Log("🎉 CLASS UP!");
         }
     }
