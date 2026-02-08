@@ -1,3 +1,4 @@
+using System.Collections;
 using Enemy.Test;
 using UnityEngine;
 
@@ -24,6 +25,8 @@ namespace Enemy.Scripts
         private float currentHealth;
         private float nextAttackTime;
         private Transform player;
+        private Coroutine flashCoroutine;
+        private Color originalColor;
         
         [SerializeField] private LayerMask playerLayer;
         
@@ -65,6 +68,8 @@ namespace Enemy.Scripts
             nextAttackTime = Time.time;
             
             SpawnHealthBar();
+            
+            originalColor = spriteRenderer.color;
         }
         
         void SpawnHealthBar()
@@ -173,6 +178,8 @@ namespace Enemy.Scripts
         public void TakeDamage(float damage)
         {
             currentHealth -= damage;
+
+            FlashRed();
             
             UpdateHealthBar();
             
@@ -182,6 +189,27 @@ namespace Enemy.Scripts
             {
                 Die();
             }
+        }
+
+        private void FlashRed()
+        {
+            if (spriteRenderer == null) return;
+
+            if (flashCoroutine != null)
+            {
+                StopCoroutine(flashCoroutine);
+            }
+
+            flashCoroutine = StartCoroutine(FlashCoroutine());
+        }
+
+        private IEnumerator FlashCoroutine()
+        {
+            spriteRenderer.color = Color.red;
+            
+            yield return new WaitForSeconds(0.2f);
+            
+            spriteRenderer.color = originalColor;
         }
 
         private void UpdateHealthBar()
@@ -204,11 +232,15 @@ namespace Enemy.Scripts
                 Destroy(healthBar.gameObject);
             }
             
+            spriteRenderer.color = originalColor;
+            
+            StopCoroutine(flashCoroutine);
+            
             TriggerDeathAnimation();
 
             DropBananas();
             
-            Destroy(gameObject, 0.5f);
+            Destroy(gameObject, 1.07f);
         }
 
         private void TriggerDeathAnimation()
