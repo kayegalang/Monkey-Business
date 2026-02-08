@@ -4,6 +4,54 @@ using System.Collections.Generic;
 [Serializable]
 public class MonkeyProgress
 {
+
+    // Evolution cost values
+    public int baseEvolutionCost = 100;
+    // List of first evolution costs per monkey form
+    public List<int> firstEvolutionCosts = new List<int> { 5000, 800, 1200, 1500, 2000, 2500 };
+
+    // Returns the cost to evolve to the next form
+    public int GetEvolutionCost()
+    {
+        int formIndex = Array.IndexOf(monkeyForms, currentFormId);
+        // If monkeyLevel is at evolution threshold, use per-form cost
+        if (formIndex >= 0 && formIndex < evolutionLevels.Length && monkeyLevel == evolutionLevels[formIndex])
+        {
+            // Use the cost for the current form, fallback to 1000 if out of range
+            if (formIndex < firstEvolutionCosts.Count)
+                return firstEvolutionCosts[formIndex];
+            else
+                return 1000;
+        }
+        // Otherwise, use base cost
+        return baseEvolutionCost;
+    }
+    // Track current monkey form
+    public string currentFormId;
+    // Evolution thresholds
+    private static readonly int[] evolutionLevels = { 10, 20, 30, 40, 50 };
+
+    // List of monkey forms in order
+    private static readonly string[] monkeyForms = {
+        "monkee_1", // The Monkee
+        "monkee_2", // Chiller Monkee
+        "monkee_3", // Lit Monkee
+        "kong_1",   // Battle Kong
+        "kong_2",   // Golden Kong
+        "kong_3"    // Big Chungus Kong
+    };
+
+    public void EvolveIfReady()
+    {
+        int formIndex = Array.IndexOf(monkeyForms, currentFormId);
+        // Only evolve if not at last form
+        if (formIndex < monkeyForms.Length - 1 && monkeyLevel >= evolutionLevels[formIndex])
+        {
+            currentFormId = monkeyForms[formIndex + 1];
+            monkeyLevel = 1;
+            ResetUpgrades();
+        }
+    }
     public string monkeyId;
 
     // upgrade levels (per monkey type)

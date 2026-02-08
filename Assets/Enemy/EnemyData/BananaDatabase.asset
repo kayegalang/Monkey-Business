@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e99d5f564fce5c429ebef176b3cb850, type: 3}
+  m_Name: BananaDatabase
+  m_EditorClassIdentifier: Assembly-CSharp::BananaDatabase
+  bananas:
+  - {fileID: 11400000, guid: 9863c5c1d4e062142ba407a13149f33f, type: 2}
+  - {fileID: 11400000, guid: 01235421c4230d84cb02f84b9eb7404e, type: 2}
+  - {fileID: 11400000, guid: 9a878dfd9f075114789f9ec0eba20cab, type: 2}
+  - {fileID: 11400000, guid: 4ac8921a3f759ba4a91654c27b0c9334, type: 2}
+  - {fileID: 11400000, guid: ef20a2edcbd796a4bae259bba2a1931b, type: 2}
+  - {fileID: 11400000, guid: 5a835c195c620ba4980d064659984301, type: 2}

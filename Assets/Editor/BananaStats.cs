@@ -6,11 +6,13 @@ public static class BananaStats
     [MenuItem("Tools/Bananas/Write All Banana Stats")]
     static void WriteAll()
     {
+
+
         Write(
             id: "bananemy",
             name: "bananemy",
             path: "Assets/Enemy/EnemyData/bananemy.asset",
-            health: 10f,
+            health: 15f,
             damage: 2f,
             cooldown: 0.5f,
             speed: 1f,
@@ -18,58 +20,58 @@ public static class BananaStats
         );
 
         Write(
-            id: "unripe_bananemy",
-            name: "unripe bananemy",
-            path: "Assets/Enemy/EnemyData/unripe_bananemy.asset",
-            health: 12f,
-            damage: 1.5f,
-            cooldown: 0.6f,
-            speed: 1.1f,
-            range: 2.2f
+            id: "ripe_banana",
+            name: "ripe banana",
+            path: "Assets/Enemy/EnemyData/ripe_banana.asset",
+            health: 200f,
+            damage: 25f,
+            cooldown: 0.4f,
+            speed: 1.2f,
+            range: 3f
         );
 
         Write(
-            id: "long_bananemy",
-            name: "long bananemy",
-            path: "Assets/Enemy/EnemyData/long_bananemy.asset",
-            health: 8f,
-            damage: 2.5f,
-            cooldown: 0.7f,
-            speed: 0.9f,
-            range: 1.8f
+            id: "rotton_bananemy",
+            name: "rotton bananemy",
+            path: "Assets/Enemy/EnemyData/rotton_bananemy.asset",
+            health: 250f,
+            damage: 30f,
+            cooldown: 0.5f,
+            speed: 1.3f,
+            range: 3.5f
         );
 
         Write(
             id: "bananemy_boxer_chad",
             name: "bananemy boxer chad",
             path: "Assets/Enemy/EnemyData/bananemy_boxer_chad.asset",
-            health: 15f,
-            damage: 1.2f,
-            cooldown: 0.4f,
-            speed: 1.2f,
-            range: 2.5f
+            health: 300f,
+            damage: 35f,
+            cooldown: 0.3f,
+            speed: 1.4f,
+            range: 4f
         );
 
         Write(
             id: "golden_bananemy",
             name: "golden bananemy",
             path: "Assets/Enemy/EnemyData/golden_bananemy.asset",
-            health: 20f,
-            damage: 3f,
-            cooldown: 0.8f,
-            speed: 1.3f,
-            range: 3f
+            health: 400f,
+            damage: 45f,
+            cooldown: 0.2f,
+            speed: 1.5f,
+            range: 5f
         );
 
         Write(
             id: "big_bad_bananemy",
             name: "big bad bananemy",
             path: "Assets/Enemy/EnemyData/big_bad_bananemy.asset",
-            health: 7f,
-            damage: 4f,
-            cooldown: 1f,
-            speed: 1.5f,
-            range: 1.5f
+            health: 500f,
+            damage: 60f,
+            cooldown: 0.15f,
+            speed: 1.6f,
+            range: 6f
         );
 
         AssetDatabase.SaveAssets();
