@@ -26,14 +26,15 @@ public class GameSceneManager : MonoBehaviour
         }
 
         Instance = this;
-        DontDestroyOnLoad(gameObject);
         
-        // Make sure the GameObject won't be destroyed
+        // IMPORTANT: Move to root if nested
         if (transform.parent != null)
         {
-            Debug.LogWarning("GameSceneManager should not have a parent! Moving to root.");
+            Debug.LogWarning("GameSceneManager was nested under another GameObject. Moving to root for DontDestroyOnLoad.");
             transform.SetParent(null);
         }
+        
+        DontDestroyOnLoad(gameObject);
 
         SceneManager.sceneLoaded += OnSceneLoaded;
         
@@ -89,7 +90,7 @@ public class GameSceneManager : MonoBehaviour
         // Only clear instance if we're the actual singleton
         if (Instance == this)
         {
-            Debug.LogError("GameSceneManager Instance is being destroyed! This should not happen!");
+            Debug.Log("GameSceneManager destroyed!");
             Instance = null;
         }
         
@@ -146,5 +147,13 @@ public class GameSceneManager : MonoBehaviour
         }
  
         pauseShadePanel.SetActive(active);
+    }
+    
+    // Add this method for setting up references from Bootstrap
+    public void SetupReferences(BananaWallet walletRef, UpgradeStat[] upgradesRef)
+    {
+        wallet = walletRef;
+        allUpgrades = upgradesRef;
+        Debug.Log($"References set: Wallet={wallet != null}, Upgrades={upgradesRef?.Length ?? 0}");
     }
 }

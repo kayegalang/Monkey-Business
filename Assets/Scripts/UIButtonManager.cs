@@ -17,13 +17,15 @@ public class UIButtonManager : MonoBehaviour
         }
 
         Instance = this;
-        DontDestroyOnLoad(gameObject);
         
-        // Make sure it's at root level
+        // IMPORTANT: Move to root if nested
         if (transform.parent != null)
         {
+            Debug.LogWarning("UIButtonManager was nested under another GameObject. Moving to root for DontDestroyOnLoad.");
             transform.SetParent(null);
         }
+        
+        DontDestroyOnLoad(gameObject);
 
         SceneManager.sceneLoaded += OnSceneLoaded;
         
@@ -79,22 +81,9 @@ public class UIButtonManager : MonoBehaviour
     {
         Debug.Log("Menu button clicked");
         
-        // Extra safety check with detailed logging
         if (GameSceneManager.Instance == null)
         {
             Debug.LogError("❌ GameSceneManager.Instance is NULL!");
-            Debug.LogError("Searching for GameSceneManager in scene...");
-            
-            // Try to find it manually
-            GameSceneManager manager = FindObjectOfType<GameSceneManager>();
-            if (manager != null)
-            {
-                Debug.LogError("Found GameSceneManager but Instance is not set! This is a bug in GameSceneManager.Awake()");
-            }
-            else
-            {
-                Debug.LogError("GameSceneManager does not exist in the scene at all!");
-            }
             return;
         }
         
