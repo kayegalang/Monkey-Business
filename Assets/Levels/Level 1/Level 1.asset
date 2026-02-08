@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35902201cc4fb47e295a03043e5c1d08, type: 3}
+  m_Name: Level 1
+  m_EditorClassIdentifier: Assembly-CSharp::Wave_System.Scripts.LevelData
+  levelName: Level 1
+  description: First level - introduces basic enemies
+  backgroundPrefab: {fileID: 7180133033334529621, guid: dedde7b9f77f0433ab92877fb4ff97f7, type: 3}
+  waves:
+  - {fileID: 11400000, guid: 585824e4d1c614a989c6c7a89f10dac8, type: 2}
+  - {fileID: 11400000, guid: 328e6d1bd78e14ee68314e06c0da2a38, type: 2}
+  - {fileID: 11400000, guid: d9071ca9dcb1240c6beb4d4d933e5b32, type: 2}
+  showVictoryScreen: 0
+  nextLevel: {fileID: 0}
