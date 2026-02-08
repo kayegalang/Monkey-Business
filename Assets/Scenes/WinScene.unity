@@ -663,7 +663,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4346291045711933501, guid: 4564eb789e2985c47aa45d01c000f325, type: 3}
       propertyPath: m_Name
-      value: StartGameCanvas
+      value: WinScreenCanvas
       objectReference: {fileID: 0}
     - target: {fileID: 4346291045711933501, guid: 4564eb789e2985c47aa45d01c000f325, type: 3}
       propertyPath: m_IsActive

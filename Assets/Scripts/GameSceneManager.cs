@@ -1,12 +1,17 @@
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameSceneManager : MonoBehaviour
-{ 
-    public enum State {Start, Battle, Pause, GameOver}
+{
+    // Keep scene names in one place to avoid typos
+    private const string START_SCENE = "StartScene";
+    private const string BATTLE_SCENE = "BattleScene";
+    private const string GAMEOVER_SCENE = "GameOverScene";
+    private const string WIN_SCENE = "WinScene"; // <-- create/use this scene name
+
+    public enum State { Start, Battle, Pause, GameOver, Win }
     public State state;
-   
+
     public static GameSceneManager Instance { get; private set; }
 
     [Header("Data References")]
@@ -14,10 +19,9 @@ public class GameSceneManager : MonoBehaviour
     [SerializeField] private UpgradeStat[] allUpgrades;
 
     private GameObject pauseShadePanel;
-   
+
     private void Awake()
     {
-        // Check if instance already exists
         if (Instance != null && Instance != this)
         {
             Debug.LogWarning("Duplicate GameSceneManager found! Destroying this one.");
@@ -26,22 +30,20 @@ public class GameSceneManager : MonoBehaviour
         }
 
         Instance = this;
-        
-        // IMPORTANT: Move to root if nested
+
         if (transform.parent != null)
         {
             Debug.LogWarning("GameSceneManager was nested under another GameObject. Moving to root for DontDestroyOnLoad.");
             transform.SetParent(null);
         }
-        
-        DontDestroyOnLoad(gameObject);
 
+        DontDestroyOnLoad(gameObject);
         SceneManager.sceneLoaded += OnSceneLoaded;
-        
+
         Debug.Log("✓ GameSceneManager initialized and set to DontDestroyOnLoad");
     }
 
-    void Start()
+    private void Start()
     {
         ChangeState(State.Start);
     }
@@ -50,66 +52,78 @@ public class GameSceneManager : MonoBehaviour
     {
         Debug.Log($"ChangeState called: {state} → {newState}");
         state = newState;
-        
+
         switch (newState)
         {
             case State.Start:
-                if (SceneManager.GetActiveScene().name != "StartScene")
-                {
-                    Debug.Log("Loading StartScene...");
-                    SceneManager.LoadScene("StartScene");
-                }
+                LoadIfNotActive(START_SCENE);
                 break;
-                
+
             case State.Battle:
-                if (SceneManager.GetActiveScene().name != "BattleScene")
+                if (SceneManager.GetActiveScene().name != BATTLE_SCENE)
                 {
                     Debug.Log("Loading BattleScene...");
                     ResetAllData();
-                    SceneManager.LoadScene("BattleScene");
+                    SceneManager.LoadScene(BATTLE_SCENE);
                 }
                 else
                 {
+                    // If already in battle, unpause
                     SetPausePanel(false);
                 }
                 break;
-                
+
             case State.Pause:
                 SetPausePanel(true);
                 break;
-                
+
             case State.GameOver:
                 Debug.Log("Loading GameOverScene...");
-                SceneManager.LoadScene("GameOverScene");
+                SceneManager.LoadScene(GAMEOVER_SCENE);
+                break;
+
+            case State.Win:
+                Debug.Log("Loading WinScene...");
+                SceneManager.LoadScene(WIN_SCENE);
                 break;
         }
     }
-   
+
+    private void LoadIfNotActive(string sceneName)
+    {
+        if (SceneManager.GetActiveScene().name != sceneName)
+        {
+            Debug.Log($"Loading {sceneName}...");
+            SceneManager.LoadScene(sceneName);
+        }
+    }
+
     private void OnDestroy()
     {
-        // Only clear instance if we're the actual singleton
         if (Instance == this)
         {
             Debug.Log("GameSceneManager destroyed!");
             Instance = null;
         }
-        
+
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
-    
+
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         Debug.Log($"Scene loaded: {scene.name}");
-        
+
         switch (scene.name)
         {
-            case "BattleScene":
+            case BATTLE_SCENE:
                 pauseShadePanel = GameObject.Find("PauseShadePanel");
                 Invoke(nameof(HidePausePanel), 0.1f);
                 break;
 
-            case "StartScene":
-            case "GameOverScene":
+            // Any non-battle scenes should not keep a pause panel reference
+            case START_SCENE:
+            case GAMEOVER_SCENE:
+            case WIN_SCENE:
                 pauseShadePanel = null;
                 break;
         }
@@ -125,6 +139,9 @@ public class GameSceneManager : MonoBehaviour
     {
         if (wallet != null)
             wallet.Reset();
+
+        // If you later want “upgrades reset on battle start”, do it here too.
+        // (Your current code only resets wallet.)
     }
 
     private void SetPausePanel(bool active)
@@ -134,11 +151,14 @@ public class GameSceneManager : MonoBehaviour
             Debug.LogWarning("PauseShadePanel not found!");
             return;
         }
- 
+
         pauseShadePanel.SetActive(active);
     }
-    
-    // Add this method for setting up references from Bootstrap
+
+    // Convenience methods so other scripts don’t need to know enum names
+    public void WinGame() => ChangeState(State.Win);
+    public void LoseGame() => ChangeState(State.GameOver);
+
     public void SetupReferences(BananaWallet walletRef, UpgradeStat[] upgradesRef)
     {
         wallet = walletRef;
