@@ -36,7 +36,9 @@ public class UIButtonManager : MonoBehaviour
 
     public void OnPauseButtonClick()
     {
+        Debug.Log("Game is in paused state");
         gameSceneManager.ChangeState(GameSceneManager.State.Pause);
+        
     }
 
     // --- Shared ---

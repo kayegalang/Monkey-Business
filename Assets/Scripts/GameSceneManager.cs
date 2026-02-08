@@ -40,33 +40,12 @@ public class GameSceneManager : MonoBehaviour
                    SceneManager.LoadScene("BattleScene");
                break;
            case State.Pause:
+               
                break;
            case State.Results:
                break;
        }
    }
-   
-   public void StopGameMechanics()
-   {
-   }
-
-   //move to its own menu buttons script
-    public void OnStartButtonClick()
-    {
-       ChangeState(State.Battle);
-   }
-    
-    public void OnQuitButtonClick()
-    {
-        #if UNITY_EDITOR
-        EditorApplication.isPlaying = false;
-        #else
-        Application.Quit();
-        Debug.Log("Application Quit!");
-        #endif
-    }
-    
-
    
 
 }
