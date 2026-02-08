@@ -20,5 +20,9 @@ namespace Enemy.Scripts
         [Header("Identity")]
         public string enemyId = "enemy";
         public string displayName = "Enemy";
+        
+        [Header("Health Bar")]
+        [Tooltip("Where to position the health bar relative to enemy center")]
+        public Vector3 healthBarOffset = new Vector3(0, 1f, 0);
     }
 }
