@@ -8,6 +8,9 @@ namespace Enemy.Scripts
         [Header("Enemy Configuration")]
         public EnemyData enemyData;
         
+        [Header("Currency")]
+        [SerializeField] private BananaWallet wallet;
+        
         [Header("References")]
         [SerializeField] private SpriteRenderer spriteRenderer;
         [SerializeField] private Animator animator;
@@ -221,7 +224,15 @@ namespace Enemy.Scripts
 
         private void DropBananas()
         {
-            Debug.Log("Dropped " + enemyData.currencyAmount + " bananas");
+            if (wallet != null)
+            {
+                wallet.Add(enemyData.currencyAmount);
+                Debug.Log("Dropped " + enemyData.currencyAmount + " bananas");
+            }
+            else
+            {
+                Debug.LogWarning("No BananaWallet on " + gameObject.name);
+            }
         }
     }
 }

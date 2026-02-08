@@ -199,6 +199,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy.Scripts.Enemy
   enemyData: {fileID: 11400000, guid: bbd39318d92494d089c3cb1c0036ccae, type: 2}
+  wallet: {fileID: 11400000, guid: c7d9563f1e84cac438e4789b972fd0fc, type: 2}
   spriteRenderer: {fileID: 7742227061043792290}
   animator: {fileID: 4019196305150834199}
   healthBarPrefab: {fileID: 3704040301294740266, guid: 9652f16c5ec9b4679ad6965cac7c5c21, type: 3}
@@ -297,8 +298,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 835157f1caa9f674580bf574770a98bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BananaDropper
-  wallet: {fileID: 11400000, guid: c7d9563f1e84cac438e4789b972fd0fc, type: 2}
-  dropAmount: 1
 --- !u!1 &6293147204784611547
 GameObject:
   m_ObjectHideFlags: 0

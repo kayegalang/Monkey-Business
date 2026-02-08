@@ -475,6 +475,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameSceneManager
   state: 0
+  wallet: {fileID: 11400000, guid: c7d9563f1e84cac438e4789b972fd0fc, type: 2}
+  allUpgrades:
+  - {fileID: 11400000, guid: 5c96cca5f8a1cc2469021856e8aa8c33, type: 2}
+  - {fileID: 11400000, guid: e4f83516ac1844b4d9b890e39e238af8, type: 2}
+  - {fileID: 11400000, guid: d5ddec76a59ef6345bc0ceef52fd47c9, type: 2}
+  - {fileID: 11400000, guid: 2b0d4eed91be0314681f605e53c6ef61, type: 2}
+  - {fileID: 11400000, guid: 31f66643fc4f72c44a835723be0b1a52, type: 2}
+  - {fileID: 11400000, guid: ea5a7b09fffabab43ba71ae82a77df1c, type: 2}
+  - {fileID: 11400000, guid: a16a5d4f2ffebeb4587cec95ec800fc5, type: 2}
+  - {fileID: 11400000, guid: 8ec762f6d31f6ab4b9e767497d6b1a24, type: 2}
 --- !u!114 &2336650003442996452
 MonoBehaviour:
   m_ObjectHideFlags: 0
