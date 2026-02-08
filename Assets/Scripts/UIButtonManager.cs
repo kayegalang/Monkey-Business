@@ -18,7 +18,6 @@ public class UIButtonManager : MonoBehaviour
 
         Instance = this;
         
-        // IMPORTANT: Move to root if nested
         if (transform.parent != null)
         {
             Debug.LogWarning("UIButtonManager was nested under another GameObject. Moving to root for DontDestroyOnLoad.");
@@ -26,7 +25,6 @@ public class UIButtonManager : MonoBehaviour
         }
         
         DontDestroyOnLoad(gameObject);
-
         SceneManager.sceneLoaded += OnSceneLoaded;
         
         Debug.Log("✓ UIButtonManager initialized and set to DontDestroyOnLoad");
@@ -43,9 +41,89 @@ public class UIButtonManager : MonoBehaviour
         
         WireButton("StartButton", OnStartButtonClick);
         WireButton("PauseButton", OnPauseButtonClick);
-        WireButton("ResumeButton", OnResumeButtonClick);
         WireButton("QuitButton", OnQuitButtonClick);
-        WireButton("MenuButton", OnMenuButtonClick);
+        
+        // NEW: Wire pause menu buttons immediately if we're in BattleScene
+        if (scene.name == "BattleScene")
+        {
+            // Use Invoke to ensure hierarchy is fully loaded
+            Invoke(nameof(WirePauseMenuButtons), 0.1f);
+        }
+    }
+
+    // NEW METHOD: Wire pause menu buttons by searching within the pause panel
+    public void WirePauseMenuButtons()
+    {
+        GameObject pausePanel = GameObject.Find("PauseShadePanel");
+        if (pausePanel == null)
+        {
+            Debug.LogWarning("PauseShadePanel not found in scene!");
+            return;
+        }
+
+        // Temporarily activate to find children, then restore state
+        bool wasActive = pausePanel.activeSelf;
+        pausePanel.SetActive(true);
+
+        // Find buttons within the pause panel
+        WireButtonInParent(pausePanel.transform, "ResumeButton", OnResumeButtonClick);
+        WireButtonInParent(pausePanel.transform, "MenuButton", OnMenuButtonClick);
+        WireButtonInParent(pausePanel.transform, "QuitButton", OnQuitButtonClick);
+
+        // Restore original state
+        pausePanel.SetActive(wasActive);
+        
+        Debug.Log("✓ Pause menu buttons wired");
+    }
+
+    // NEW HELPER: Find button within a parent transform
+    private void WireButtonInParent(Transform parent, string buttonName, UnityEngine.Events.UnityAction action)
+    {
+        Transform buttonTransform = parent.Find(buttonName);
+        if (buttonTransform == null)
+        {
+            // Try recursive search
+            buttonTransform = FindInChildren(parent, buttonName);
+        }
+
+        if (buttonTransform == null)
+        {
+            Debug.LogWarning($"Button '{buttonName}' not found in pause menu!");
+            return;
+        }
+
+        Button button = buttonTransform.GetComponent<Button>();
+        if (button == null)
+        {
+            Debug.LogWarning($"Button component not found on '{buttonName}'!");
+            return;
+        }
+
+        button.onClick.RemoveAllListeners();
+        button.onClick.AddListener(action);
+        
+        ButtonAnimator animator = buttonTransform.GetComponent<ButtonAnimator>();
+        if (animator == null)
+        {
+            buttonTransform.gameObject.AddComponent<ButtonAnimator>();
+        }
+        
+        Debug.Log($"✓ Wired pause menu button: {buttonName}");
+    }
+
+    // Helper to recursively find a child by name
+    private Transform FindInChildren(Transform parent, string name)
+    {
+        foreach (Transform child in parent)
+        {
+            if (child.name == name)
+                return child;
+            
+            Transform found = FindInChildren(child, name);
+            if (found != null)
+                return found;
+        }
+        return null;
     }
 
     private void WireButton(string buttonName, UnityEngine.Events.UnityAction action)
@@ -63,11 +141,9 @@ public class UIButtonManager : MonoBehaviour
             return;
         }
 
-        // Remove existing listeners to avoid duplicates
         button.onClick.RemoveAllListeners();
         button.onClick.AddListener(action);
         
-        // Add animation component
         ButtonAnimator animator = obj.GetComponent<ButtonAnimator>();
         if (animator == null)
         {
