@@ -462,6 +462,64 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1865571434340729841
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4063228005635239573}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e04c9ed750a88c84dac2ee0e7daee7ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameSceneManager
+  state: 0
+--- !u!114 &2336650003442996452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5535786302287637399}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 114d3e9d5ccc2fd40a508f491aae3547, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIButtonManager
+  gameSceneManager: {fileID: 1865571434340729841}
+--- !u!4 &3102343752513361588
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5535786302287637399}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 995.7547, y: 316.65063, z: -536.0886}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4063228005635239573
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8758917793694538089}
+  - component: {fileID: 1865571434340729841}
+  m_Layer: 0
+  m_Name: GameSceneManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1001 &5488308941878178009
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -470,6 +528,34 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3312327237835151340, guid: 4564eb789e2985c47aa45d01c000f325, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3312327237835151340, guid: 4564eb789e2985c47aa45d01c000f325, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3312327237835151340, guid: 4564eb789e2985c47aa45d01c000f325, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2336650003442996452}
+    - target: {fileID: 3312327237835151340, guid: 4564eb789e2985c47aa45d01c000f325, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3312327237835151340, guid: 4564eb789e2985c47aa45d01c000f325, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnQuitButtonClick
+      objectReference: {fileID: 0}
+    - target: {fileID: 3312327237835151340, guid: 4564eb789e2985c47aa45d01c000f325, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UIButtonManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3312327237835151340, guid: 4564eb789e2985c47aa45d01c000f325, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 3545611925703515333, guid: 4564eb789e2985c47aa45d01c000f325, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -554,6 +640,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 4445031176710454429, guid: 4564eb789e2985c47aa45d01c000f325, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2336650003442996452}
+    - target: {fileID: 4445031176710454429, guid: 4564eb789e2985c47aa45d01c000f325, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnStartButtonClick
+      objectReference: {fileID: 0}
     - target: {fileID: 5455864057086011728, guid: 4564eb789e2985c47aa45d01c000f325, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -631,63 +725,38 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4564eb789e2985c47aa45d01c000f325, type: 3}
---- !u!1001 &5853217553579953719
-PrefabInstance:
+--- !u!1 &5535786302287637399
+GameObject:
   m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3102343752513361588}
+  - component: {fileID: 2336650003442996452}
+  m_Layer: 0
+  m_Name: UIButtonManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8758917793694538089
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4063228005635239573}
   serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 2933852207779682142, guid: 3e3b9b716107bc54fa5c03beb1629313, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 995.7547
-      objectReference: {fileID: 0}
-    - target: {fileID: 2933852207779682142, guid: 3e3b9b716107bc54fa5c03beb1629313, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 316.65063
-      objectReference: {fileID: 0}
-    - target: {fileID: 2933852207779682142, guid: 3e3b9b716107bc54fa5c03beb1629313, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -536.0886
-      objectReference: {fileID: 0}
-    - target: {fileID: 2933852207779682142, guid: 3e3b9b716107bc54fa5c03beb1629313, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2933852207779682142, guid: 3e3b9b716107bc54fa5c03beb1629313, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2933852207779682142, guid: 3e3b9b716107bc54fa5c03beb1629313, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2933852207779682142, guid: 3e3b9b716107bc54fa5c03beb1629313, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2933852207779682142, guid: 3e3b9b716107bc54fa5c03beb1629313, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2933852207779682142, guid: 3e3b9b716107bc54fa5c03beb1629313, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2933852207779682142, guid: 3e3b9b716107bc54fa5c03beb1629313, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7591294418757902498, guid: 3e3b9b716107bc54fa5c03beb1629313, type: 3}
-      propertyPath: m_Name
-      value: GameSceneManager
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 3e3b9b716107bc54fa5c03beb1629313, type: 3}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 995.7547, y: 316.65063, z: -536.0886}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -696,4 +765,5 @@ SceneRoots:
   - {fileID: 198643709}
   - {fileID: 5488308941878178009}
   - {fileID: 1604330324}
-  - {fileID: 5853217553579953719}
+  - {fileID: 8758917793694538089}
+  - {fileID: 3102343752513361588}

@@ -28,27 +28,22 @@ public class GameSceneManager : MonoBehaviour
 
    public void ChangeState(State newState)
    {
-      state = newState; switch (newState)
-      {
-         case State.Start:
-             SceneManager.LoadScene("StartScene");
-            break;
-         case State.Battle:
-             //check if pause screen active
-                //if true, resume game mechanics
-             SceneManager.LoadScene("BattleScene");
-            break;
-         
-         case State.Pause:
-             //set active pause screen
-             //StopGameMechanics();
-             break;
-         
-         case State.Results:
-             //check if win or lost
-             
-            break;
-      }
+       state = newState;
+       switch (newState)
+       {
+           case State.Start:
+               if (SceneManager.GetActiveScene().name != "StartScene")
+                   SceneManager.LoadScene("StartScene");
+               break;
+           case State.Battle:
+               if (SceneManager.GetActiveScene().name != "BattleScene")
+                   SceneManager.LoadScene("BattleScene");
+               break;
+           case State.Pause:
+               break;
+           case State.Results:
+               break;
+       }
    }
    
    public void StopGameMechanics()
