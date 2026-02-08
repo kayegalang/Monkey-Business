@@ -1,7 +1,3 @@
-
-
-
-
 // UIButtonManager.cs
 using UnityEditor;
 using UnityEngine;
@@ -10,9 +6,6 @@ using UnityEngine.UI;
 
 public class UIButtonManager : MonoBehaviour
 {
-    [Header("Script References")]
-    public GameSceneManager gameSceneManager;
-
     public static UIButtonManager Instance { get; private set; }
 
     private void Awake()
@@ -34,7 +27,6 @@ public class UIButtonManager : MonoBehaviour
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
-    // --- find and wire buttons when a new scene loads ---
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         switch (scene.name)
@@ -69,20 +61,20 @@ public class UIButtonManager : MonoBehaviour
     // --- Main Menu ---
     public void OnStartButtonClick()
     {
-        gameSceneManager.ChangeState(GameSceneManager.State.Battle);
+        GameSceneManager.Instance.ChangeState(GameSceneManager.State.Battle);
     }
 
-    // --- Pause Menu (wired by code in BattleScene) ---
+    // --- Pause Menu ---
     public void OnPauseButtonClick()
     {
         Debug.Log("Game is in paused state");
-        gameSceneManager.ChangeState(GameSceneManager.State.Pause);
+        GameSceneManager.Instance.ChangeState(GameSceneManager.State.Pause);
     }
 
     public void OnResumeButtonClick()
     {
         Debug.Log("Game resumed");
-        gameSceneManager.ChangeState(GameSceneManager.State.Battle);
+        GameSceneManager.Instance.ChangeState(GameSceneManager.State.Battle);
     }
 
     // --- Shared ---
@@ -92,9 +84,6 @@ public class UIButtonManager : MonoBehaviour
         EditorApplication.isPlaying = false;
         #else
         Application.Quit();
-        Debug.Log("Application Quit!");
         #endif
     }
 }
-
-

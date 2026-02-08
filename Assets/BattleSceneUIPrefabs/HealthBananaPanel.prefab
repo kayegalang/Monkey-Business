@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 31567596420089691}
   - component: {fileID: 1924181179089708040}
   - component: {fileID: 7991482771356566309}
+  - component: {fileID: 8174306914760056588}
   m_Layer: 5
   m_Name: BananaCounterPanel
   m_TagString: Untagged
@@ -121,6 +122,20 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &8174306914760056588
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 333083895759344136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95d0364c45ae7fc4bbcd9d69e94335c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BananaCounterUI
+  wallet: {fileID: 11400000, guid: c7d9563f1e84cac438e4789b972fd0fc, type: 2}
+  bananaText: {fileID: 1165528358310263488}
 --- !u!1 &2730514815132655334
 GameObject:
   m_ObjectHideFlags: 0
@@ -310,7 +325,7 @@ GameObject:
   - component: {fileID: 1909978607168004416}
   - component: {fileID: 1165528358310263488}
   m_Layer: 5
-  m_Name: BananaCounter(TMP)
+  m_Name: BananaText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
