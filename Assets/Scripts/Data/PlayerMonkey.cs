@@ -57,6 +57,14 @@ public class PlayerMonkey : MonoBehaviour
             MonkeyStatsManager.Instance.OnStatsChanged += UpdateStatsFromManager;
             MonkeyStatsManager.Instance.OnMonkeyEvolved += OnEvolved;
         }
+        
+        GenerateCollider();
+
+    }
+    
+    void GenerateCollider()
+    {
+        gameObject.AddComponent<PolygonCollider2D>();
     }
     
     void OnDestroy()

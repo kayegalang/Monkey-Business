@@ -11,6 +11,7 @@ namespace Audio.Scripts
         [Header("Audio Sources")]
         [SerializeField] private AudioSource musicSource;
         [SerializeField] private AudioSource sfxSource;
+        [SerializeField] private AudioSource walkingSource;
         
         [Header("Volume Settings")]
         [Range(0f, 1f)]
@@ -69,6 +70,16 @@ namespace Audio.Scripts
             }
             
             UpdateVolumes();
+        }
+
+        public void PlayWalkingSound()
+        {
+            walkingSource.Play();
+        }
+
+        public void StopWalkingSound()
+        {
+            walkingSource.Stop();
         }
         
         void CreateSFXPool()
