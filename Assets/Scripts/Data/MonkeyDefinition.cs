@@ -6,8 +6,7 @@ public enum MonkeyStatId
     Damage,
     AttacksPerSecond,
     MoveSpeed,
-    Range,
-    Cooldown
+    Range
 }
 
 [System.Serializable]
@@ -52,7 +51,6 @@ public class MonkeyDefinition : ScriptableObject
     public float apsMultiplier = 1f;
     public float speedMultiplier = 1f;
     public float rangeMultiplier = 1f;
-    public float cooldownMultiplier = 1f;
 
     [Header("Upgradeable Stats Rules (designer editable)")]
     public StatUpgradeRule health;
@@ -60,7 +58,6 @@ public class MonkeyDefinition : ScriptableObject
     public StatUpgradeRule attacksPerSecond;
     public StatUpgradeRule moveSpeed;
     public StatUpgradeRule range;
-    public StatUpgradeRule cooldown;
 
     // Helper for runtime reads:
     public float GetStat(MonkeyStatId stat, int upgradeLevel)
@@ -72,7 +69,6 @@ public class MonkeyDefinition : ScriptableObject
             case MonkeyStatId.AttacksPerSecond:  return attacksPerSecond.ValueAt(upgradeLevel) * apsMultiplier;
             case MonkeyStatId.MoveSpeed:         return moveSpeed.ValueAt(upgradeLevel) * speedMultiplier;
             case MonkeyStatId.Range:             return range.ValueAt(upgradeLevel) * rangeMultiplier;
-            case MonkeyStatId.Cooldown:          return cooldown.ValueAt(upgradeLevel) * cooldownMultiplier;
             default: return 0f;
         }
     }
@@ -86,7 +82,6 @@ public class MonkeyDefinition : ScriptableObject
             case MonkeyStatId.AttacksPerSecond:  return attacksPerSecond.CostAt(currentUpgradeLevel);
             case MonkeyStatId.MoveSpeed:         return moveSpeed.CostAt(currentUpgradeLevel);
             case MonkeyStatId.Range:             return range.CostAt(currentUpgradeLevel);
-            case MonkeyStatId.Cooldown:          return cooldown.CostAt(currentUpgradeLevel);
             default: return 0;
         }
     }
