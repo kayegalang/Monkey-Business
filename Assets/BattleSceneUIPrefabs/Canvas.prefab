@@ -566,7 +566,6 @@ GameObject:
   - component: {fileID: 6796069976929980671}
   - component: {fileID: 6135039413455485955}
   - component: {fileID: 2839567412915932094}
-  - component: {fileID: 5139011112744785800}
   m_Layer: 5
   m_Name: UpgradeButton
   m_TagString: Untagged
@@ -678,24 +677,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &5139011112744785800
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5742170109487302830}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 99a9140dfc76a2e45a6705cc79b1ae9d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::UpgradeButtonUI
-  upgrade: {fileID: 11400000, guid: 8ec762f6d31f6ab4b9e767497d6b1a24, type: 2}
-  wallet: {fileID: 11400000, guid: c7d9563f1e84cac438e4789b972fd0fc, type: 2}
-  nameText: {fileID: 608475083197407721}
-  costText: {fileID: 8820844184574549647}
-  levelText: {fileID: 2554326502391843840}
-  button: {fileID: 2839567412915932094}
 --- !u!1 &5894371842721328347
 GameObject:
   m_ObjectHideFlags: 0
@@ -1069,7 +1050,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99a9140dfc76a2e45a6705cc79b1ae9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeButtonUI
-  upgrade: {fileID: 11400000, guid: ea5a7b09fffabab43ba71ae82a77df1c, type: 2}
+  statType: 0
   wallet: {fileID: 11400000, guid: c7d9563f1e84cac438e4789b972fd0fc, type: 2}
   nameText: {fileID: 6240777122234043548}
   costText: {fileID: 6482640265875319017}
@@ -1249,7 +1230,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99a9140dfc76a2e45a6705cc79b1ae9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeButtonUI
-  upgrade: {fileID: 11400000, guid: d5ddec76a59ef6345bc0ceef52fd47c9, type: 2}
+  statType: 0
   wallet: {fileID: 11400000, guid: c7d9563f1e84cac438e4789b972fd0fc, type: 2}
   nameText: {fileID: 6440965073926959278}
   costText: {fileID: 6201352061504476379}
@@ -1440,7 +1421,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99a9140dfc76a2e45a6705cc79b1ae9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeButtonUI
-  upgrade: {fileID: 11400000, guid: 5c96cca5f8a1cc2469021856e8aa8c33, type: 2}
+  statType: 0
   wallet: {fileID: 11400000, guid: c7d9563f1e84cac438e4789b972fd0fc, type: 2}
   nameText: {fileID: 9075862330863239621}
   costText: {fileID: 8259241041860928944}
@@ -1620,7 +1601,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99a9140dfc76a2e45a6705cc79b1ae9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeButtonUI
-  upgrade: {fileID: 11400000, guid: 2b0d4eed91be0314681f605e53c6ef61, type: 2}
+  statType: 0
   wallet: {fileID: 11400000, guid: c7d9563f1e84cac438e4789b972fd0fc, type: 2}
   nameText: {fileID: 8765076549086917527}
   costText: {fileID: 8560931594598078434}
@@ -1822,7 +1803,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99a9140dfc76a2e45a6705cc79b1ae9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeButtonUI
-  upgrade: {fileID: 11400000, guid: 31f66643fc4f72c44a835723be0b1a52, type: 2}
+  statType: 0
   wallet: {fileID: 11400000, guid: c7d9563f1e84cac438e4789b972fd0fc, type: 2}
   nameText: {fileID: 1376293691485486312}
   costText: {fileID: 2050497453364025501}
@@ -2000,7 +1981,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99a9140dfc76a2e45a6705cc79b1ae9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeButtonUI
-  upgrade: {fileID: 11400000, guid: e4f83516ac1844b4d9b890e39e238af8, type: 2}
+  statType: 0
   wallet: {fileID: 11400000, guid: c7d9563f1e84cac438e4789b972fd0fc, type: 2}
   nameText: {fileID: 1006397115356545208}
   costText: {fileID: 187523476717790413}
@@ -2023,7 +2004,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99a9140dfc76a2e45a6705cc79b1ae9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeButtonUI
-  upgrade: {fileID: 11400000, guid: e4f83516ac1844b4d9b890e39e238af8, type: 2}
+  statType: 0
   wallet: {fileID: 11400000, guid: c7d9563f1e84cac438e4789b972fd0fc, type: 2}
   nameText: {fileID: 1006397115356545208}
   costText: {fileID: 187523476717790413}
@@ -2219,7 +2200,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99a9140dfc76a2e45a6705cc79b1ae9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeButtonUI
-  upgrade: {fileID: 11400000, guid: a16a5d4f2ffebeb4587cec95ec800fc5, type: 2}
+  statType: 0
   wallet: {fileID: 11400000, guid: c7d9563f1e84cac438e4789b972fd0fc, type: 2}
   nameText: {fileID: 3619198623767392259}
   costText: {fileID: 4419366844695942262}

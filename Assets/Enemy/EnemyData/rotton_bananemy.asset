@@ -19,6 +19,7 @@ MonoBehaviour:
   cooldown: 0.7
   speed: 0.9
   range: 1.8
-  currencyAmount: 1
+  currencyAmount: 5
   enemyId: rotton_bananemy
   displayName: rotton bananemy
+  healthBarOffset: {x: 0, y: 1, z: 0}

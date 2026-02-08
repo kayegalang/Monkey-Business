@@ -19,6 +19,7 @@ MonoBehaviour:
   cooldown: 1
   speed: 1.5
   range: 1.5
-  currencyAmount: 1
+  currencyAmount: 3
   enemyId: big_bad_bananemy
   displayName: big bad bananemy
+  healthBarOffset: {x: 0, y: 1, z: 0}

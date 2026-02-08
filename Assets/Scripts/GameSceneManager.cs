@@ -126,18 +126,6 @@ public class GameSceneManager : MonoBehaviour
         if (wallet != null)
             wallet.Reset();
  
-        if (allUpgrades != null)
-        {
-            foreach (var upgrade in allUpgrades)
-            {
-                if (upgrade != null)
-                    upgrade.Reset();
-            }
-        }
- 
-        Debug.Log("All data reset!");
-    }
- 
     private void SetPausePanel(bool active)
     {
         if (pauseShadePanel == null)

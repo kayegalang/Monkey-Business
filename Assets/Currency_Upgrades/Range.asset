@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeStat
   upgradeName: RNG
   description: 
-  baseCost: 10
-  costMultiplier: 1.5
-  currentLevel: 2
+  baseCost: 35
+  costMultiplier: 1.45
+  currentLevel: 0
   maxLevel: 10
-  baseValue: 1
-  valuePerLevel: 0.5
+  baseValue: 2
+  valuePerLevel: 0.2

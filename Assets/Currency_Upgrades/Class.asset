@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeStat
   upgradeName: Class
   description: 
-  baseCost: 10
+  baseCost: 300
   costMultiplier: 1.5
-  currentLevel: 3
-  maxLevel: 10
-  baseValue: 1
-  valuePerLevel: 0.5
+  currentLevel: 0
+  maxLevel: 5
+  baseValue: 0
+  valuePerLevel: 0

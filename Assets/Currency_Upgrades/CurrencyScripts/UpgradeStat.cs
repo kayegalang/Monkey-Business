@@ -1,6 +1,4 @@
-// UpgradeStat.cs
 using UnityEngine;
-using System;
 
 [CreateAssetMenu(fileName = "NewUpgrade", menuName = "Game/Upgrade Stat")]
 public class UpgradeStat : ScriptableObject
@@ -9,69 +7,26 @@ public class UpgradeStat : ScriptableObject
     public string upgradeName;
     public string description;
 
-    [Header("Cost")]
-    [SerializeField] private int baseCost = 10;
-    [SerializeField] private float costMultiplier = 1.5f;
-    // e.g. base 10 → 15 → 22 → 33 → 50...
+    [Header("Cost Configuration")]
+    public int baseCost = 30;
+    public float costMultiplier = 1.4f;
 
-    [Header("State")]
-    [SerializeField] private int currentLevel;
-    [SerializeField] private int maxLevel = 10;
+    [Header("Value Configuration")]
+    public float baseValue = 100f;
+    public float valuePerLevel = 15f;
+    
+    [Header("Limits")]
+    public int maxLevel = 12;
 
-    [Header("Value")]
-    [SerializeField] private float baseValue = 1f;
-    [SerializeField] private float valuePerLevel = 0.5f;
-
-    // events
-    public event Action<UpgradeStat> OnUpgraded;
-
-    // --- properties ---
-    public int CurrentLevel => currentLevel;
-    public int MaxLevel => maxLevel;
-    public bool IsMaxed => currentLevel >= maxLevel;
-
-    public int CurrentCost
+    // Calculate cost at a specific level
+    public int GetCostAtLevel(int level)
     {
-        get
-        {
-            // cost increases with each purchase
-            return Mathf.RoundToInt(baseCost * Mathf.Pow(costMultiplier, currentLevel));
-        }
+        return Mathf.RoundToInt(baseCost * Mathf.Pow(costMultiplier, level));
     }
 
-    public float CurrentValue
+    // Calculate value at a specific level
+    public float GetValueAtLevel(int level)
     {
-        get
-        {
-            return baseValue + (valuePerLevel * currentLevel);
-        }
-    }
-
-    // --- methods ---
-    public bool TryUpgrade(BananaWallet wallet)
-    {
-        if (IsMaxed)
-        {
-            Debug.Log($"{upgradeName} is already maxed!");
-            return false;
-        }
-
-        int cost = CurrentCost;
-
-        if (!wallet.TrySpend(cost))
-        {
-            Debug.Log($"Not enough bananas! Need {cost}");
-            return false;
-        }
-
-        currentLevel++;
-        OnUpgraded?.Invoke(this);
-        Debug.Log($"{upgradeName} upgraded to level {currentLevel}!");
-        return true;
-    }
-
-    public void Reset()
-    {
-        currentLevel = 0;
+        return baseValue + (valuePerLevel * level);
     }
 }

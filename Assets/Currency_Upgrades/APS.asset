@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeStat
   upgradeName: APS
   description: 
-  baseCost: 10
-  costMultiplier: 1.5
-  currentLevel: 2
+  baseCost: 40
+  costMultiplier: 1.45
+  currentLevel: 0
   maxLevel: 10
   baseValue: 1
-  valuePerLevel: 0.5
+  valuePerLevel: 0.15

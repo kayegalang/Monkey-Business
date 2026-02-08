@@ -1,36 +1,29 @@
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 [Serializable]
 public class MonkeyProgress
 {
-
-    // Evolution cost values
-    public int baseEvolutionCost = 100;
-    // List of first evolution costs per monkey form
-    public List<int> firstEvolutionCosts = new List<int> { 5000, 800, 1200, 1500, 2000, 2500 };
-
-    // Returns the cost to evolve to the next form
-    public int GetEvolutionCost()
-    {
-        int formIndex = Array.IndexOf(monkeyForms, currentFormId);
-        // If monkeyLevel is at evolution threshold, use per-form cost
-        if (formIndex >= 0 && formIndex < evolutionLevels.Length && monkeyLevel == evolutionLevels[formIndex])
-        {
-            // Use the cost for the current form, fallback to 1000 if out of range
-            if (formIndex < firstEvolutionCosts.Count)
-                return firstEvolutionCosts[formIndex];
-            else
-                return 1000;
-        }
-        // Otherwise, use base cost
-        return baseEvolutionCost;
-    }
     // Track current monkey form
     public string currentFormId;
+    
+    // Monkey level
+    public int monkeyLevel;
+    
+    // Upgrade levels (6 stats total)
+    public int healthLvl;
+    public int damageLvl;
+    public int apsLvl;
+    public int dpsLvl;      // NEW! 6th stat
+    public int speedLvl;
+    public int rangeLvl;
+    
+    public string monkeyId;
+    
     // Evolution thresholds
     private static readonly int[] evolutionLevels = { 10, 20, 30, 40, 50 };
-
+    
     // List of monkey forms in order
     private static readonly string[] monkeyForms = {
         "monkee_1", // The Monkee
@@ -40,10 +33,22 @@ public class MonkeyProgress
         "kong_2",   // Golden Kong
         "kong_3"    // Big Chungus Kong
     };
-
+    
+    // Evolution cost values
+    public int baseEvolutionCost = 300;
+    public float evolutionCostMultiplier = 1.5f;
+    
+    // Returns the cost to evolve to the next form
+    public int GetEvolutionCost()
+    {
+        int formIndex = Array.IndexOf(monkeyForms, currentFormId);
+        return (int)(baseEvolutionCost * Mathf.Pow(evolutionCostMultiplier, formIndex));
+    }
+    
     public void EvolveIfReady()
     {
         int formIndex = Array.IndexOf(monkeyForms, currentFormId);
+        
         // Only evolve if not at last form
         if (formIndex < monkeyForms.Length - 1 && monkeyLevel >= evolutionLevels[formIndex])
         {
@@ -52,18 +57,7 @@ public class MonkeyProgress
             ResetUpgrades();
         }
     }
-    public string monkeyId;
-
-    // upgrade levels (per monkey type)
-    public int healthLvl;
-    public int damageLvl;
-    public int apsLvl;
-    public int speedLvl;
-    public int rangeLvl;
-
-    // optional "prestige" / monkey level concept that resets progress
-    public int monkeyLevel;
-
+    
     public int GetLevel(MonkeyStatId stat) => stat switch
     {
         MonkeyStatId.Health => healthLvl,
@@ -73,7 +67,7 @@ public class MonkeyProgress
         MonkeyStatId.Range => rangeLvl,
         _ => 0
     };
-
+    
     public void SetLevel(MonkeyStatId stat, int value)
     {
         value = Math.Max(0, value);
@@ -86,10 +80,10 @@ public class MonkeyProgress
             case MonkeyStatId.Range: rangeLvl = value; break;
         }
     }
-
+    
     public void ResetUpgrades()
     {
-        healthLvl = damageLvl = apsLvl = speedLvl = rangeLvl = 0;
+        healthLvl = damageLvl = apsLvl = dpsLvl = speedLvl = rangeLvl = 0;
     }
 }
 
@@ -98,12 +92,12 @@ public class PlayerMonkeysSave
 {
     public string activeMonkeyId = "starter";
     public List<MonkeyProgress> perMonkey = new();
-
+    
     public MonkeyProgress GetOrCreate(string monkeyId)
     {
         var found = perMonkey.Find(m => m.monkeyId == monkeyId);
         if (found != null) return found;
-
+        
         var created = new MonkeyProgress { monkeyId = monkeyId };
         perMonkey.Add(created);
         return created;

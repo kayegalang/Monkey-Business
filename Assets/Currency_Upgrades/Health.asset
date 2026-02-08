@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Health
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeStat
   upgradeName: HP
-  description: 
-  baseCost: 10
-  costMultiplier: 1.5
-  currentLevel: 3
-  maxLevel: 10
-  baseValue: 1
-  valuePerLevel: 0.5
+  description: Maximum health points
+  baseCost: 30
+  costMultiplier: 1.4
+  currentLevel: 0
+  maxLevel: 12
+  baseValue: 100
+  valuePerLevel: 15
