@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class GameSceneManager : MonoBehaviour
 { 
     
-   public enum State {Start, Battle, Pause, Results}
+   public enum State {Start, Battle, Pause, GameOver}
 
    public State state;
    
@@ -59,7 +59,8 @@ public class GameSceneManager : MonoBehaviour
            case State.Pause:
                SetPausePanel(true);
                break;
-           case State.Results:
+           case State.GameOver:
+               SceneManager.LoadScene("GameOverScene");
                break;
        }
    }
