@@ -206,6 +206,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2390487934558999669, guid: 0c274abf5b389fb4fa1580ef6e83f09d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1062705182}
+    - target: {fileID: 2390487934558999669, guid: 0c274abf5b389fb4fa1580ef6e83f09d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnMenuButtonClick
+      objectReference: {fileID: 0}
+    - target: {fileID: 2417677716055571393, guid: 0c274abf5b389fb4fa1580ef6e83f09d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1062705182}
+    - target: {fileID: 2417677716055571393, guid: 0c274abf5b389fb4fa1580ef6e83f09d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnQuitButtonClick
+      objectReference: {fileID: 0}
     - target: {fileID: 2808631072503321663, guid: 0c274abf5b389fb4fa1580ef6e83f09d, type: 3}
       propertyPath: m_Name
       value: GameOverCanvas
@@ -293,8 +309,28 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1002504743870245944, guid: 0c274abf5b389fb4fa1580ef6e83f09d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1062705182}
   m_SourcePrefab: {fileID: 100100000, guid: 0c274abf5b389fb4fa1580ef6e83f09d, type: 3}
+--- !u!1 &1062705178 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1002504743870245944, guid: 0c274abf5b389fb4fa1580ef6e83f09d, type: 3}
+  m_PrefabInstance: {fileID: 346129259}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1062705182
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1062705178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 114d3e9d5ccc2fd40a508f491aae3547, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIButtonManager
 --- !u!1 &1458107467
 GameObject:
   m_ObjectHideFlags: 0
