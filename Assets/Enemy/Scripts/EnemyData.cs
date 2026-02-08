@@ -17,5 +17,6 @@ namespace Enemy.Scripts
         public float speed = 1f;
         public float range = 1f;
         public float cooldown = 3f;
+        public int currencyAmount = 1;
     }
 }

@@ -194,10 +194,7 @@ namespace Enemy.Scripts
 
         private void TriggerHurtAnimation()
         {
-            if (animator != null)
-            {
-                animator.SetTrigger("Hit");
-            }
+            
         }
 
         void Die()
@@ -208,6 +205,8 @@ namespace Enemy.Scripts
             }
             
             TriggerDeathAnimation();
+
+            DropBananas();
             
             Destroy(gameObject, 0.5f);
         }
@@ -218,6 +217,11 @@ namespace Enemy.Scripts
             {
                 animator.SetTrigger("Death");
             }
+        }
+
+        private void DropBananas()
+        {
+            Debug.Log("Dropped " + enemyData.currencyAmount + " bananas");
         }
     }
 }
