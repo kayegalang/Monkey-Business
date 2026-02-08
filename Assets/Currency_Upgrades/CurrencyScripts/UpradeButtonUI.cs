@@ -69,7 +69,6 @@ public class UpgradeButtonUI : MonoBehaviour
         
         if (success)
         {
-            StatPopupSpawner.Instance?.Spawn((StatPopupSpawner.PopupType)(int)statType, transform.position);
             RefreshUI();
         }
     }
