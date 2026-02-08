@@ -120,12 +120,13 @@ public class GameSceneManager : MonoBehaviour
         if (pauseShadePanel != null)
             pauseShadePanel.SetActive(false);
     }
- 
+
     private void ResetAllData()
     {
         if (wallet != null)
             wallet.Reset();
- 
+    }
+
     private void SetPausePanel(bool active)
     {
         if (pauseShadePanel == null)
