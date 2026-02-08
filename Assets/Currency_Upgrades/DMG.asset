@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: DMG
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeStat
   upgradeName: DMG
-  description: 
-  baseCost: 10
-  costMultiplier: 1.5
-  currentLevel: 4
-  maxLevel: 10
-  baseValue: 1
-  valuePerLevel: 0.5
+  description: Attack damage
+  baseCost: 35
+  costMultiplier: 1.45
+  currentLevel: 0
+  maxLevel: 12
+  baseValue: 5
+  valuePerLevel: 2

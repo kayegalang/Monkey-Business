@@ -33,4 +33,14 @@ public class BananaWallet : ScriptableObject
         bananas = 0;
         OnBananasChanged?.Invoke(bananas);
     }
+    
+    // For getting banana count
+    public int GetCurrency() => bananas;
+
+    // For UI button events (alias for OnBananasChanged)
+    public event Action<int> OnCurrencyChanged
+    {
+        add => OnBananasChanged += value;
+        remove => OnBananasChanged -= value;
+    }
 }

@@ -95,11 +95,6 @@ public class GameSceneManager : MonoBehaviour
  {
      wallet.Reset();
  
-     foreach (var upgrade in allUpgrades)
-     {
-         upgrade.Reset();
-     }
- 
      Debug.Log("All data reset!");
  }
  
