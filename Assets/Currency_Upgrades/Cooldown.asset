@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ec15b2a464c8c646926fee79dfcac66, type: 3}
   m_Name: Cooldown
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeStat
-  upgradeName: 
+  upgradeName: CD
   description: 
   baseCost: 10
   costMultiplier: 1.5
-  currentLevel: 0
+  currentLevel: 2
   maxLevel: 10
   baseValue: 1
   valuePerLevel: 0.5
