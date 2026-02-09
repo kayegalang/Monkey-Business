@@ -10,11 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 961b491a2c5934db99b11e17ef7563e7, type: 3}
-  m_Name: Wave 2
+  m_Name: Wave 10
   m_EditorClassIdentifier: Assembly-CSharp::Wave_System.Scripts.WaveData
-  waveName: Wave 2
+  waveName: Wave 1
   enemySpawns:
-  - enemyType: {fileID: 11400000, guid: 9863c5c1d4e062142ba407a13149f33f, type: 2}
+  - enemyType: {fileID: 11400000, guid: ef20a2edcbd796a4bae259bba2a1931b, type: 2}
+    count: 1
+    spawnDelay: 1
+  - enemyType: {fileID: 11400000, guid: 01235421c4230d84cb02f84b9eb7404e, type: 2}
     count: 5
     spawnDelay: 1
   spawnDistanceFromCamera: 15

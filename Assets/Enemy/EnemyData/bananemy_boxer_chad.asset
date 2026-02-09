@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9aee9c8c98c1e4339939a3d4db40b4cd, type: 3}
   m_Name: bananemy_boxer_chad
   m_EditorClassIdentifier: Assembly-CSharp::Enemy.Scripts.EnemyData
-  enemySprite: {fileID: 0}
-  animatorController: {fileID: 0}
+  enemySprite: {fileID: -1258880041, guid: 84ef3b571cec2be439ce186ab4460b32, type: 3}
+  animatorController: {fileID: 9100000, guid: d50bd17d5472b2c40920f0b2b5d2b3bf, type: 2}
   health: 15
   damage: 1.2
   cooldown: 0.4

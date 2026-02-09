@@ -68,6 +68,14 @@ namespace Audio.Scripts
                 sfxSource = sfxObj.AddComponent<AudioSource>();
                 sfxSource.playOnAwake = false;
             }
+
+            if (walkingSource == null)
+            {
+                GameObject walkingObj = new GameObject("WalkingSource");
+                walkingObj.transform.SetParent(transform);
+                walkingSource = walkingObj.AddComponent<AudioSource>();
+                walkingSource.playOnAwake = false;
+            }
             
             UpdateVolumes();
         }

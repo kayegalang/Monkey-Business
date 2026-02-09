@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MonkeyDefinition
   monkeyId: monkee_1
   displayName: The Monkee
-  icon: {fileID: 0}
+  icon: {fileID: 567548306, guid: 13b23e999d1f5274eb6c3dcb8a2cf194, type: 3}
   prefab: {fileID: 0}
+  animator: {fileID: 0}
   healthMultiplier: 1
   damageMultiplier: 1
   apsMultiplier: 1
@@ -41,7 +42,7 @@ MonoBehaviour:
     costGrowth: 1.2
   moveSpeed:
     baseValue: 1
-    addPerLevel: 0
+    addPerLevel: 0.1
     multPerLevel: 1
     baseCost: 0
     costGrowth: 1

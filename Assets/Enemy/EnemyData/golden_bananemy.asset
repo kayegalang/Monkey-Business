@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9aee9c8c98c1e4339939a3d4db40b4cd, type: 3}
   m_Name: golden_bananemy
   m_EditorClassIdentifier: Assembly-CSharp::Enemy.Scripts.EnemyData
-  enemySprite: {fileID: 0}
-  animatorController: {fileID: 0}
+  enemySprite: {fileID: -2125505088, guid: c9ce33828299984418c7deaf5ba231f5, type: 3}
+  animatorController: {fileID: 9100000, guid: 0329aaec25e42d94bb0192c6837f84ca, type: 2}
   health: 20
   damage: 3
   cooldown: 0.8
