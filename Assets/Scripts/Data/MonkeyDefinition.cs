@@ -1,4 +1,3 @@
-using UnityEditor.Animations;
 using UnityEngine;
 
 public enum MonkeyStatId
@@ -44,7 +43,6 @@ public class MonkeyDefinition : ScriptableObject
     public string displayName = "Starter Monkey";
     public Sprite icon;
     public GameObject prefab;            // optional: monkey visuals/controller prefab
-    public AnimatorController animator;
 
     [Header("Class / Skin Multipliers (stat multiplier)")]
     [Tooltip("Applied after upgrades. 1 = no change.")]
