@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MonkeyDefinition
   monkeyId: kong_2
   displayName: Golden Kong
-  icon: {fileID: 0}
+  icon: {fileID: 1547186593, guid: 4fb4083fbe01949478345aa6ebefd569, type: 3}
   prefab: {fileID: 0}
+  animator: {fileID: 0}
   healthMultiplier: 1
   damageMultiplier: 1
   apsMultiplier: 1

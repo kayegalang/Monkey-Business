@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9aee9c8c98c1e4339939a3d4db40b4cd, type: 3}
   m_Name: ripe_banana
   m_EditorClassIdentifier: Assembly-CSharp::Enemy.Scripts.EnemyData
-  enemySprite: {fileID: 0}
-  animatorController: {fileID: 0}
+  enemySprite: {fileID: 333330714, guid: b63eaf0de5f0ef1499484647d1ab9c93, type: 3}
+  animatorController: {fileID: 9100000, guid: 7d08d0a079cc97f489cef3954f4f6ead, type: 2}
   health: 12
   damage: 1.5
   cooldown: 0.6

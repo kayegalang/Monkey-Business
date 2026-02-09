@@ -3,8 +3,7 @@ using System.Collections;
 using Audio.Scripts;
 
 /// <summary>
-/// Player Monkey - DPS is now purely calculated (Damage × APS)
-/// DPS upgrade button just increases attack speed!
+/// Player Monkey - Preserves your existing scale (7.36) when swapping sprites!
 /// </summary>
 public class PlayerMonkey : MonoBehaviour
 {
@@ -17,7 +16,7 @@ public class PlayerMonkey : MonoBehaviour
     [SerializeField] private Animator animator;
     
     [Header("Health Bar")]
-    [SerializeField] private Transform healthBarFill;
+    [SerializeField] private PlayerHealthBarUI healthBarUI;
     
     [Header("Audio")]
     [SerializeField] private AudioClip attackSound;
@@ -26,17 +25,20 @@ public class PlayerMonkey : MonoBehaviour
     [SerializeField] private AudioSource walkingAudioSource;
     private AudioSource currentAttackSource;
     
-    // Current stats (updated from MonkeyStatsManager)
+    // Store the initial scale to preserve it!
+    private Vector3 initialScale;
+    
+    // Current stats
     private float maxHealth;
     private float currentHealth;
-    private float damage;           // Damage per hit
-    private float attacksPerSecond; // Attacks per second
+    private float damage;
+    private float attacksPerSecond;
     private float moveSpeed;
     private float attackRange;
     
     // Derived stats
-    private float dps;              // Calculated: damage × attacksPerSecond
-    private float attackCooldown;   // Calculated: 1 / attacksPerSecond
+    private float dps;
+    private float attackCooldown;
     
     // State
     private enum State { Moving, Fighting }
@@ -48,7 +50,12 @@ public class PlayerMonkey : MonoBehaviour
     
     void Start()
     {
+        // CAPTURE the current scale (7.36, 7.36, 7.36)
+        initialScale = transform.localScale;
+        Debug.Log($"Captured initial scale: {initialScale}");
+        
         UpdateStatsFromManager();
+        UpdateSpriteFromDefinition();
         currentHealth = maxHealth;
         UpdateHealthBar();
         
@@ -59,12 +66,14 @@ public class PlayerMonkey : MonoBehaviour
         }
         
         GenerateCollider();
-
     }
     
     void GenerateCollider()
     {
-        gameObject.AddComponent<PolygonCollider2D>();
+        if (GetComponent<PolygonCollider2D>() == null)
+        {
+            gameObject.AddComponent<PolygonCollider2D>();
+        }
     }
     
     void OnDestroy()
@@ -80,26 +89,63 @@ public class PlayerMonkey : MonoBehaviour
     {
         if (MonkeyStatsManager.Instance == null) return;
         
-        // Get base stats
+        float oldMaxHealth = maxHealth;
+        
         maxHealth = MonkeyStatsManager.Instance.GetCurrentHealth();
         damage = MonkeyStatsManager.Instance.GetCurrentDamage();
         attacksPerSecond = MonkeyStatsManager.Instance.GetCurrentAttackSpeed();
         moveSpeed = MonkeyStatsManager.Instance.GetCurrentMoveSpeed();
         attackRange = MonkeyStatsManager.Instance.GetCurrentRange();
         
-        // Calculate derived stats
-        dps = MonkeyStatsManager.Instance.GetCurrentDPS(); // Damage × APS
+        dps = MonkeyStatsManager.Instance.GetCurrentDPS();
         attackCooldown = attacksPerSecond > 0 ? 1f / attacksPerSecond : 1f;
         
-        Debug.Log($"Player stats updated: HP:{maxHealth}, DMG:{damage}, APS:{attacksPerSecond}, DPS:{dps:F1}, Speed:{moveSpeed}, Range:{attackRange}");
-        Debug.Log($"Attack cooldown: {attackCooldown:F2}s (attacking {attacksPerSecond:F2} times per second)");
+        if (oldMaxHealth > 0 && maxHealth > oldMaxHealth)
+        {
+            float healthPercent = currentHealth / oldMaxHealth;
+            currentHealth = maxHealth * healthPercent;
+            Debug.Log($"Max health increased! Healing proportionally: {currentHealth:F0}/{maxHealth:F0}");
+        }
+        
+        if (currentHealth > maxHealth)
+        {
+            currentHealth = maxHealth;
+        }
+        
+        UpdateHealthBar();
+        
+        Debug.Log($"Player stats updated: HP:{maxHealth:F0}, DMG:{damage:F1}, APS:{attacksPerSecond:F2}, DPS:{dps:F1}, Speed:{moveSpeed:F1}, Range:{attackRange:F1}");
+    }
+    
+    void UpdateSpriteFromDefinition()
+    {
+        if (MonkeyStatsManager.Instance == null || spriteRenderer == null) return;
+        
+        MonkeyDefinition definition = MonkeyStatsManager.Instance.GetCurrentDefinition();
+        if (definition != null && definition.icon != null)
+        {
+            spriteRenderer.sprite = definition.icon;
+            
+            // RESTORE the original scale! (7.36, 7.36, 7.36)
+            transform.localScale = initialScale;
+            
+            Debug.Log($"✨ Sprite updated to: {definition.displayName}, scale maintained at {initialScale}");
+        }
+        else if (definition != null && definition.icon == null)
+        {
+            Debug.LogWarning($"⚠️ MonkeyDefinition '{definition.displayName}' has no icon sprite assigned!");
+        }
     }
     
     void OnEvolved()
     {
         currentHealth = maxHealth;
         UpdateHealthBar();
-        Debug.Log("Player evolved! Healed to full!");
+        
+        // Swap sprite but KEEP the original scale!
+        UpdateSpriteFromDefinition();
+        
+        Debug.Log("🎉 Player evolved! Sprite changed, scale preserved!");
     }
     
     void Update()
@@ -235,7 +281,7 @@ public class PlayerMonkey : MonoBehaviour
         UpdateHealthBar();
         FlashRed();
         
-        Debug.Log($"Player took {damage} damage! Health: {currentHealth}/{maxHealth}");
+        Debug.Log($"Player took {damage} damage! Health: {currentHealth:F0}/{maxHealth:F0}");
         
         if (hurtSound != null && currentHealth > 0)
         {
@@ -266,10 +312,9 @@ public class PlayerMonkey : MonoBehaviour
     
     void UpdateHealthBar()
     {
-        if (healthBarFill != null && maxHealth > 0)
+        if (healthBarUI != null)
         {
-            float fillAmount = currentHealth / maxHealth;
-            healthBarFill.localScale = new Vector3(fillAmount, 1f, 1f);
+            healthBarUI.UpdateHealth(currentHealth, maxHealth);
         }
     }
     

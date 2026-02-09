@@ -27,6 +27,9 @@ public class MonkeyStatsManager : MonoBehaviour
     private MonkeyProgress currentMonkey;
     private MonkeyDefinition currentDefinition;
     
+    [Header("Session Settings")]
+    [SerializeField] private bool resetOnRestart = true; 
+    
     // Events
     public event Action OnStatsChanged;
     public event Action OnMonkeyEvolved;
@@ -41,6 +44,12 @@ public class MonkeyStatsManager : MonoBehaviour
         }
         Instance = this;
         DontDestroyOnLoad(gameObject);
+        
+        if (resetOnRestart)
+        {
+            PlayerPrefs.DeleteKey("MonkeyProgress");
+            saveData = new PlayerMonkeysSave();
+        }
         
         Initialize();
     }

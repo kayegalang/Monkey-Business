@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class DebugCheats : MonoBehaviour
 {
@@ -17,6 +18,16 @@ public class DebugCheats : MonoBehaviour
         {
             wallet.Reset();
             Debug.Log("Wallet reset.");
+        }
+
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            SceneManager.LoadScene("GameOverScene");
+        }
+        
+        if (Input.GetKeyDown(KeyCode.O))
+        {
+            SceneManager.LoadScene("WinScene");
         }
     }
 }

@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MonkeyDefinition
   monkeyId: monkee_2
   displayName: Chiller Monkee
-  icon: {fileID: 0}
+  icon: {fileID: 1037934751, guid: 12f74f634ebd24b4c9eac4b321dde615, type: 3}
   prefab: {fileID: 0}
+  animator: {fileID: 0}
   healthMultiplier: 1
   damageMultiplier: 1
   apsMultiplier: 1
